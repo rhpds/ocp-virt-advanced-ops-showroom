@@ -2,9 +2,7 @@
 
 == Introduction
 
-* _Challenge_: As workload demand fluctuates and business needs evolve, IT teams face the constant pressure to ensure their infrastructure can scale efficiently while maintaining optimal performance. Slow workload deployment and fragmented management across different platforms will hinder agility and business value in the long run. 
-
-* _Challenge in our Scenario_: Our journey begins with a major challenge; the annual "Mega-Sale Monday" event. Our flagship e-commerce website, now partially migrated to VM-based services on OpenShift Virtualization, is anticipating an unprecedented surge in traffic. Last year, our website crashed due to unexpected traffic spikes, leading to significant lost sales and frustrated customers. This year, while we are determined to be prepared, we need to know how to recognize unexpected issues in our environment and how to address them to ensure that the scenario from last year does not repeat itself.
+Our journey begins with a major challenge; the annual "Mega-Sale Monday" event. Our flagship e-commerce website, now partially migrated to VM-based services on OpenShift Virtualization, is anticipating an unprecedented surge in traffic. Last year, our website crashed due to unexpected traffic spikes, leading to significant lost sales and frustrated customers. This year, while we are determined to be prepared, we need to know how to recognize unexpected issues in our environment and how to address them to ensure that the scenario from last year does not repeat itself. In this module you will learn how to discover a high-load scenario on your cluster, how to mitigate and remediate the cluster by scaling resources both vertically and horizontally, and finally learn how to balance the resources on your cluster for future events.
 
 == Credentials for the Red Hat OpenShift Console
 
@@ -246,7 +244,7 @@ If you have exhausted the physical resources in your cluster the traditional opt
 
 One workaround for this is to temporarily enable SWAP/Memory Overcommit on your nodes so that you can buy time until the new hardware arrives, this allows for the worker nodes to SWAP and use hard disk space to write application memory. While writing to hard disk is much much slower than writing to system memory, it does allow to preserve workloads until additional resources can arrive.
 
-[[scaling_cluster]]
+[[cluster_scale]]
 == Scaling a Cluster By Adding a Node.
 
 The primary recourse when you have run out of physical resources on the cluster is the scale the cluster by adding additional worker nodes. This can then allow for workloads that are failing or cannot be assigned to be assigned successfully. This section of the lab is dedicated to just this idea, we will overload our cluster, and then add a new node to allow all VMs to run successfully.

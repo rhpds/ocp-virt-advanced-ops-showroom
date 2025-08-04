@@ -1,3 +1,9 @@
+= Security and Compliance
+
+== Introduction
+
+The Mega-Sale was a success, but now, a critical security audit is looming. We need to demonstrate strict adherence to industry compliance standards for all our virtualized workloads. Our challenge is to ensure a unified approach to security across both VMs and containers. In this module we will be tasked with scanning our infrastructure with the OpenShift Compliance Operator and remediating any reported vulnerabilities to ensure that our cluster meets our strict security standards. We will also configure distinct user accounts and access roles for members of our team that need limited access to our virtualization infrastructure.
+
 [[scan_comp]]
 == Scanning Infrastructure with the OpenShift Compliance Operator
 
@@ -97,8 +103,11 @@ image::module-02-sec-comp/27-compliance_check_results.png[title="Compliance Chec
 
 [[node_remediate]]
 == Node Remediation with the OpenShift Compliance Operator
+<WRITE THIS SECTION>
 
 [[cluster_rbac]]
 == Configuring Role-based Access Control for Cluster Roles
+<WRITE THIS SECTION>
+
 
 == Summary

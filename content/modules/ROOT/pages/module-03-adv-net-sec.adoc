@@ -1,5 +1,9 @@
 = Advanced Networking and Security
 
+== Introduction
+
+With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will learn more about visualizing network traffic flows the the Network Observability Operator, and how to shape and secure our network by implementing Network Policies.
+
 [[net_observe]]
 == Examining Network Traffic with the Network Observability Operator
 
@@ -99,10 +103,9 @@ image::module-03-adv-net-sec/38-delete_policy.png[title="Delete Policy", link=se
 
 [[net_pol_projects]]
 == Configure Network Policies to Manage VM Traffic Between Projects
+<WRITE THIS SECTION>
 
 
 
 == Summary
-In this section we learned how to apply a simple network policy to block egress traffic from a virtual machine to a public website.
-While this is a very simple example and application of this function, network policies are quite feature rich and very tuneable.
-In an advanced example, they can allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.
+In this section we learned how to make use of the Network Observability Operator to scan our cluster and visualize traffic patterns in and out. We then learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to shape traffic between virtual guests and projects on the same cluster. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.

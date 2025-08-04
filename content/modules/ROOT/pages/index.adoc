@@ -28,7 +28,7 @@ This workshop is designed for Virtual Machine Administrators, Virtual Infrastruc
 
 == What Content is Covered in this Lab?
 
-This lab consists of *three* main sections:
+This lab consists of *five* main sections:
 
 * _Performance, Scalability, and Troubleshooting_: In this section we will take a look at some of the performance metrics on our Red Hat OpenShift Cluster, we will simulate a high load scenario, and we will determine how to troubleshoot and mitigate the issue by scaling our resources appropriately with the tools and resources at our disposal within Red Hat OpenShift, and OpenShift Virtualization.
 

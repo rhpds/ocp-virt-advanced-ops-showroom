@@ -29,6 +29,9 @@
 *** xref:module-04-virt-automation.adoc#vm_mgmt_backup[Backup and Restore Virtual Machines]
 
 * xref:module-05-virt-acm.adoc[Advanced Management of Virtual Machines]
+** xref:module-05-virt-acm.adoc#discover_cluster[Discover Your Cluster]
+** xref:module-05-virt-acm.adoc#explore_cluster[Explore Managed Cluster Resources]
+** xref:module-05-virt-acm.adoc#deploy_workload[Deploy Virtual Machines Remotely]
 
 * xref:conclusion.adoc[Conclusion]
 ** xref:conclusion.adoc#key_takeaways[Key Takeaways]

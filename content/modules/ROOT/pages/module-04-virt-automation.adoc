@@ -1,5 +1,10 @@
 = Automation of Virtual Machines
 
+== Introduction
+
+The rapid expansion of our VM fleet at "Legacy Systems Inc." has led to a significant increase in manual, repetitive tasks – patching, resource modification, and state management. We, as the VM administrators, are struggling to keep up, limiting our ability to innovate and respond quickly to business demands. Organizations need a solution that makes it simple to migrate their existing virtual machines onto an alternative platform with minimal risk of disrupting their existing workloads and associated services, and to automate their VM lifecycle to improve efficiency and speed of delivery. In this module we will cover how to create a dynamic inventory of virtual machines, and how to leverage Ansible Automation Platform to perform a number of virtual infrastructure management tasks in an automated manner.
+
+
 == Credentials for Ansible Automation Platform
 
 Your Ansible Automation Platform console is available {aap_controller_web_url}[here^].

@@ -1,0 +1,20 @@
+= Advanced Management of Virtual Machines
+
+== Introduction
+
+As Legacy Systems Inc. continues its expansion, we've found ourselves deploying OpenShift Virtualization across multiple data centers and public cloud regions to host our critical VMs. With the potential to host virtualized clusters in various cloud providers such as AWS, IBM Cloud, and Google Cloud teams need to balance investments in and training on new platforms while keeping existing infrastructure and applications running. Managing these disparate VM workloads can become increasingly complex without a unified approach, which is where Red Hat Advanced Cluster Management for Kubernetes comes in. Using RHACM as a single pane of glass interface to manage all of your virtual workloads no matter where they live is key to running a large distributed virtualized environment. In this module we will explore how to discover our working cluster in RHACM, how to use it to visualize our virtual workloads, and how to deploy a virtual machine to a cluster remotely.
+
+[[discover_cluster]]
+== Discover Your Cluster
+
+<WRITE THIS SECTION>
+
+[[explore_cluster]]
+== Explore Managed Cluster Resources
+
+<WRITE THIS SECTION>
+
+[[deploy_workload]]
+== Deploy Virtual Machines Remotely
+
+<WRITE THIS SECTION>

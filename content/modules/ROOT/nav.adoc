@@ -20,7 +20,7 @@
 *** xref:module-03-adv-net-sec.adoc#net_pol_egress[Configure Network Policies to Manage Cluster Egress]
 *** xref:module-03-adv-net-sec.adoc#net_pol_projects[Configure Network Policies to Manage VM Traffic Between Projects]
 
-* xreg:module-04-virt-automation.adoc[Automation of Virtual Machines]
+* xref:module-04-virt-automation.adoc[Automation of Virtual Machines]
 ** xref:module-04-virt-automation.adoc#dynamic_inventory[Creating a Dynamic Inventory for OpenShift Virtual Machines]
 ** xref:module-04-virt-automation.adoc#vm_mgmt[Automated VM Management]
 *** xref:module-04-virt-automation.adoc#vm_mgmt_power[Stop, Start, Restart Guest VMs]

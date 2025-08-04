@@ -25,8 +25,6 @@ image::module-01-perf-scale-ts/01-openshift_login.png[title="OpenShift Login", l
 
 == Module Setup
 
-For this part of the lab we will be making use of the *loadmaker* appication in the *webapp-vms* project in our Red Hat OpenShift environment.
-
 . Using the left side navigation menu click on *Workloads* followed by *Deployments*.
 . Make sure to ensure you are in Project: *webapp-vms*.
 . You should see one pod deployed here called *loadmaker*.

@@ -4,29 +4,41 @@
 
 == Introduction
 
+In today's dynamic IT landscape, organizations are grappling with the complexities of managing traditional virtualization alongside the demands of cloud-native innovation. This workshop allows IT professionals to confidently navigate this hybrid reality, demonstrating how Red Hat OpenShift Virtualization, coupled with Ansible Automation Platform and Red Hat Advanced Cluster Management for Kuberentes provides a unified, efficient, and secure platform for all workloads, whether virtual or container-based.
+
+In this lab, which is a follow-up to our very popular https://www.redhat.com/en/events/na-red-hat-openshift-virtualization[Experience OpenShift Virtualization Roadshow^] lab, we intend to equip you with the knowledge and tools to manage your environment and perform critical operational tasks often required of virtual machine administrators from day-2 onward. This ensures that your virtualized workloads are efficiently managed and maintained long after the initial deployment.
+
+== Lab Story
+
+Imagine you are the Lead Platform Engineer or VM administrator at "Legacy Systems Inc.," a company with a strong foundation in traditional virtualized workloads but a growing need to modernize and respond to rapidly evolving market demands. Your CIO recently mandated a strategic shift: consolidate all virtual and containerized workloads onto a unified platform to reduce operational complexity, improve agility, and ensure compliance. This directive was partly driven by recent market changes in the virtualization vendor space, prompting a reassessment of existing investments and strategies. 
+You've chosen Red Hat OpenShift and Red Hat OpenShift Virtualization as your strategic platform for its ability to migrate VMs and unify your workloads on a consistent application platform. Now, your team faces the critical task of mastering Day 2 operations in this new environment.
+
+== Red Hat Products Included 
+
 *OpenShift Virtualization* enables you to bring virtual machines onto a modern, Kubernetes-based infrastructure. It enables the development and delivery of new applications as well as the modernization of existing ones and can create applications that consist of virtual machines, containers, and serverless functions - all managed together using Kubernetes-native tools and paradigms.
 
 *Ansible Automation Platform* allows platform engineering and DevOps teams to create, manage, and scale automation across physical, cloud, virtual, and edge environments. With Ansible Automation Platform, you can drive consistency and manage compliance with automated workflows that span infrastructure, network components, applications, storage, security, ITSM, and more.
 
-Together these tools can be leveraged to provide an excellent solution to host, and to ease management of all of the workloads in your data center, whether they be physical or virtual.
+*Red Hat Advanced Cluster Managment for Kubernetes* offers end-to-end management, visibility, and control of your entire fleet from a single console, with operational policies built in. Extend the value of Red Hat OpenShift® by deploying apps, managing multiple clusters, and enforcing policies across multiple clusters deployed to datacenter, cloud, and edge environments.
 
-In this lab, which is a follow-up to our very popular https://www.redhat.com/en/events/na-red-hat-openshift-virtualization[Experience OpenShift Virtualization Roadshow^], we intend to equip you with the knowledge and tools to manage your environment and perform critical operational tasks often required of virtual machine administrators from day-2 onward. This ensures that your virtualized workloads are efficiently managed and maintained long after the initial deployment.
 
 == Who Will Benefit Most from attending this Lab?
 
-*Virtual Machine Administrators* -- Those responsible for day to day management of virtual guests in OpenShift Virtualization. These users will often find themselves responsible for provisioning virtual guests, and day to day management of the guests, and the applications running within.
-
-*Virtual Infrastructure Administrators* -- Those responsible for the physical infrastructure hosting the OpenShift Virtualization solution. These users will be responsible for physical hardware, storage, and networking changes to the environment, that will affect the day to day operations of the running virtual machines.
+This workshop is designed for Virtual Machine Administrators, Virtual Infrastructure Administrators, Platform Engineers, and IT Operations teams looking to optimize their virtualization strategy, streamline operations, and prepare for future application modernization.
 
 == What Content is Covered in this Lab?
 
 This lab consists of *three* main sections:
 
-* _Enabling Basic Day to Day Operations_: In this section we cover a variety of daily managment tasks that an administrator would be expected to perform in their environment, and demonstrate how many of these tasks can be automated easily with Ansible Automation Platform.
+* _Performance, Scalability, and Troubleshooting_: In this section we will take a look at some of the performance metrics on our Red Hat OpenShift Cluster, we will simulate a high load scenario, and we will determine how to troubleshoot and mitigate the issue by scaling our resources appropriately with the tools and resources at our disposal within Red Hat OpenShift, and OpenShift Virtualization.
 
-* _Real World Scaling Scenario_: In this section we create a scenario that we must triage and resolve by making use of the tools and resources at our disposal within Red Hat OpenShift and OpenShift Virtualization.
+* _Security and Compliance_: In this section we make use of the Red Hat OpenShift Compliance Operator to ensure that our cluster infrastructure meets the security standards in place at our business. We will also introduce the use of the integrated RBAC controls in Red Hat OpenShift to create additional user accounts and assign them each specific management capabilities within the cluster to assist us with role and duty segregation at our company. 
 
-* _Scale to the Moon_: In this section we will wrap up by introducing some additional thought exercises and other scenarios about what types of activities we can perform with OpenShift Virtualization and Ansible Automation Platform.
+* _Advanced Networking and Security_: In this section we will utilize the Network Observability Operator to investigate network utilization and create custom graphs of traffic flows. We will then demonstrate that we can craft specific network policies to help shape and secure our networking traffic both in and out of the cluster, and between projects internally.
+
+* _Automation of Virtual Machines_: In this section we cover a variety of daily management tasks that an administrator would be expected to perform in their environment, and demonstrate how many of these tasks can be automated easily with Ansible Automation Platform. 
+
+* _Advanced Management of Virtual Workloads_: In this section we will introduce Red Hat Advanced Cluster Managment for Kubernetes, which allows you to discover and manage your many Red Hat OpenShift clusters from a central hub cluster through a single pane of glass interface. We can use RHACM to observe and manage these remote clusters and their workloads whether they be container or virtual machine based.
 
 == Requirements for the Lab Environment
 
@@ -52,8 +64,9 @@ Your Ansible Automation Platform console is available {aap_controller_web_url}[h
 
 This edition of the lab has been developed using the following software versions:
 
-* Red Hat OpenShift 4.18.8
-* Red Hat OpenShift Virtualization 4.18.2
+* Red Hat OpenShift 4.18.20
+* Red Hat OpenShift Virtualization 4.18.8
 * Red Hat Ansible Automation Platform 2.5
+* Red Hat Advanced Cluster Management for Kubernetes 2.13
 
-(Accurate as of May 28, 2025)
+(Accurate as of Aug 02, 2025)

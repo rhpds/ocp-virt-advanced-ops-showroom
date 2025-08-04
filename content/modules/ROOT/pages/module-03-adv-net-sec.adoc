@@ -1,0 +1,108 @@
+= Advanced Networking and Security
+
+[[net_observe]]
+== Examining Network Traffic with the Network Observability Operator
+
+<WRITE THIS SECTION>
+
+[[net_policy]]
+== Configure Network Policies to Manage VM Traffic
+
+In Red Hat OpenShift administrators can configure Network Policies to further secure their environments, and the virtual guests that run there.
+
+In this portion of the lab we are going to configure a virtual machine and then apply a network policy that prevents its egress to the world.
+
+
+[[net_pol_egress]]
+== Configure Network Policies to Manage Cluster Egress
+
+In some secure environments network traffic is not allowed to leave the cluster without first passing through a proxy or some other secure gateway. Likewise, many network configurations allow for cluster egress by default. In this section of the lab we will be configuring a network policy that secures our cluster by blocking egress to outside websites.
+
+=== Confirm Network Egress on Virtual Machines
+
+. On the left side navigation menu, click on *Virtualization* then click *VirtualMachines*, and select the *rhel9-vm1* virtual machine under the *vms-aap-day2* project in the center column.
++
+image::module-03-adv-net-sec/28-view_vm.png[title="View VM", link=self, window=blank, width=100%]
++
+. Click on the *Console* tab and use the provided credentials, and the built in copy/paste functionality to authenticate to the VM.
++
+image::module-03-adv-net-sec/29-login_vm.png[title="Login to VM", link=self, window=blank, width=100%]
++
+NOTE: You may see a popup that asks you to enable the copy/paste functionality. If prompted click *Allow*.
++
+. Once you are logged in, execute the following command to start an outward bound ping to Google:
++
+[source,sh,role=execute]
+----
+ping www.google.com
+----
++
+image::module-03-adv-net-sec/30-ping_site.png[title="Ping Google", link=self, window=blank, width=100%]
++
+. Press *Control+C* to stop the ping.
++
+. From the left side navigation menu, click on *Workloads* and then *Pods*, and then click on the virt-launcher pod for the one that represents the VM *rhel9-vm1* to view the pod details.
++
+image::module-03-adv-net-sec/31-select_pod.png[title="Select Pod", link=self, window=blank, width=100%]
++
+NOTE: Pod names are randomly generated, so yours will most likely not match the screenshot above.
++
+. On the *Pod details* page, click the *Edit* option on the *Labels* section.
++
+image::module-03-adv-net-sec/32-pod_details.png[title="Edit Pod Details", link=self, window=blank, width=100%]
++
+. An *Edit labels* window will appear, you can click into the center box and add a label for `app=network-policy-deny`, press the *Enter* key to commit it, and then click the *Save* button.
++
+image::module-03-adv-net-sec/33-pod_labels.png[title="Edit Pod Labels", link=self, window=blank, width=100%]
++
+. Repeat the same process for the *rhel9-vm2* virtual machine.
+
+=== Create the Network Policy
+
+. From the left side navigation menu, click on *Networking* and then click on *NetworkPolicies*, then click on the *Create NetworkPolicy* button in the center of the screen.
++
+image::module-03-adv-net-sec/34-network_policy.png[title="Network Policy", link=self, window=blank, width=100%]
++
+. In *NetworkPolicies* fill out the following fields:
+  * *Policy name*: `ping-egress-deny`
+  * *Key*: `app`
+  * *Value*: `network-policy-deny`
+  * *Deny all egress traffic checkbox*: checked
++
+image::module-03-adv-net-sec/35-network_policy_configure.png[title="Configure Network Policy", link=self, window=blank, width=100%]
++
+. With the values filled out, you can click the *affected pods* link under the *Pod selector* section to show which pods are affected by this policy.
+Once you are satisfied with your settings you can click the *Create* button.
++
+image::module-03-adv-net-sec/36-affected_pods.png[title="Affected Pods", link=self, window=blank, width=100%]
++
+. With the policy created, go test it out.
+
+=== Confirm the Effects of the Network Policy on the VM.
+
+. Return to the console of the *rhel9-vm1* virtual machine to test our policy.
+. Using the left side navigation menu, click on *Virtualization*, then *VirtualMachines*, and select *rhel9-vm1* from the center column.
+. Click the *Console* tab of the VM, you should still be logged in from before.
+. Copy and paste the following syntax to test out the new Network Policy:
++
+[source,sh,role=execute]
+----
+ping www.google.com
+----
++
+image::module-03-adv-net-sec/37-ping_site_deny.png[title="Egress Blocked", link=self, window=blank, width=100%]
++
+. Egress from the cluster is completely blocked, including DNS lookups.
+. Once you have completed this exercise, return to *Networking* and *NetworkPolicies* and delete the *ping-egress-deny* policy using the three-dot menu on the right, and confirming in the popup box.
++
+image::module-03-adv-net-sec/38-delete_policy.png[title="Delete Policy", link=self, window=blank, width=100%]
+
+[[net_pol_projects]]
+== Configure Network Policies to Manage VM Traffic Between Projects
+
+
+
+== Summary
+In this section we learned how to apply a simple network policy to block egress traffic from a virtual machine to a public website.
+While this is a very simple example and application of this function, network policies are quite feature rich and very tuneable.
+In an advanced example, they can allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.

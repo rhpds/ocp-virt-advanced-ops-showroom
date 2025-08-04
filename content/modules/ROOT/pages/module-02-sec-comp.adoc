@@ -1,0 +1,104 @@
+[[scan_comp]]
+== Scanning Infrastructure with the OpenShift Compliance Operator
+
+This section of our lab will focus on making use of the OpenShift Compliance Operator to configure security scans in your OpenShift cluster. The compliance operator can help ensure that the hosts in your OpenShift environment meet specific security standards, and are deployed to meet those standards.
+
+image::module-02-sec-comp/15a-compliance_overview.png[title="Compliance Overview", link=self, window=blank, width=100%]
+
+. Select *Operators* and then *Installed Operators* from the left side navigation menu, confirm that you have selected *All Projects* and select the *Compliance Operator*.
++
+image::module-02-sec-comp/16-compliance_operator.png[title="Compliance Operator", link=self, window=blank, width=100%]
++
+. This takes you to the *Operator details* page, use the horizontal scrollbar to move across and locate the *ScanSetting* tab.
++
+image::module-02-sec-comp/17-compliance_details.png[title="Compliance Details", link=self, window=blank, width=100%]
++
+. Click the *Create ScanSetting* button.
++
+image::module-02-sec-comp/18-scansetting_button.png[title="Create ScanSetting Button", link=self, window=blank, width=100%]
++
+. On the *Create ScanSetting* page, set the name of the scan to `scan01`.
+Then click the *YAML view* radio button.
++
+image::module-02-sec-comp/19-create_scansetting.png[title="Create Scansetting", link=self, window=blank, width=100%]
++
+. In the ScanSetting YAML details, make note of the following values that are set by default:
+  * The *autoApplyRemediations* field is set to *false*.
+  * The *roles* to be scanned by default include both *worker* and *master* nodes.
+  * The *name* field is set to *scan01* which you entered on the form view.
+. Click the *Create* button to create this simple scansetting definition.
++
+image::module-02-sec-comp/20-scansetting_details.png[title="ScanSetting Details", link=self, window=blank, width=100%]
++
+. Now click on the *Profile* tab where there are a number of pre-defined scanning profiles.
+. In the search box, type `rhcos4` and locate the FedRamp moderate profile *rhcos4-moderate* in the list.
++
+image::module-02-sec-comp/21-profiles_detail.png[title="Profiles Detail", link=self, window=blank, width=100%]
++
+. Click on *rhcos4-moderate* and then on the *YAML*.
+Scroll down the output to browse the rules that are enforced as a part of this scan.
+A quick glimpse at the side panel shows that there are quite a few of them.
++
+image::module-02-sec-comp/22-rhcos4_mod_rules.png[title="RHCOS4-Moderate Rules", link=self, window=blank, width=100%]
++
+. When you are done reviewing the rules, return to the *Operator details* page by clicking your browser's _back button_ twice.
++
+NOTE: Additional details on the profiles available can be found https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/security_and_compliance/compliance-operator#compliance-operator-supported-profiles[here^].
++
+. Next we want to create a *ScanSettingBinding*, pairing a *Profile* with our *ScanSetting* definition we created.
+We do this by navigating to the *Scan Setting Binding* tab, and clicking the *Create ScanSettingBinding* button.
++
+image::module-02-sec-comp/23-create_scansettingbinding.png[title="Create ScanSettingBinding", link=self, window=blank, width=100%]
++
+. In the ScanSettingBinding YAML details, let us make a few changes:
+  * The *metadata/name* value should be set to `fedramp01`
+  * The *settingsRef/name* field is set to `scan01` which we created earlier.
+. Click the *Create* button.
++
+NOTE: The profile is set to rhcos4-moderate (the fedramp moderate profile) by default.
++
+image::module-02-sec-comp/24-scansettingbinding_details.png[title="ScanSettingBinding Details", link=self, window=blank, width=100%]
++
+. After the *ScanSettingBinding* is created, the fedramp01 scan will be run automatically.
+You can view this on the *Compliance Suite* tab.
++
+image::module-02-sec-comp/25-compliance_suite.png[title="Compliance Suite", link=self, window=blank, width=100%]
++
+. This Compliance Suite runs the defined scans against the specified nodes, in our case the masters and the workers defined in *scan01*.
+. You can watch as the scan proceeds through the steps of *RUNNING, AGGREGATING, and DONE* by clicking on the *Compliance Scan* tab.
++
+image::module-02-sec-comp/26-compliance_scan.png[title="Compliance Scan", link=self, window=blank, width=100%]
++
+. Once the scan completes (3-4 minutes on average) you can check your results by clicking on the *ComplianceCheckResult* tab.
++
+. Change the search bar to *Label* and apply the following labels:
+  * `compliance.openshift.io/check-status=FAIL`
+  * `compliance.openshift.io/check-severity=high`
++
+image::module-02-sec-comp/27-compliance_check_results.png[title="Compliance Check Results", link=self, window=blank, width=100%]
++
+. Twelve high severity checks have a failed status:
+
+|===
+| *ComplianceCheckResult* | *Check-Severity* | *Check-Status*
+| rhcos4-moderate-master-configure-crypto-policy| high| FAIL
+| rhcos4-moderate-master-coreos-pti-kernel-argument| high| FAIL
+| rhcos4-moderate-master-disable-ctrlaltdel-burstaction| high| FAIL
+| rhcos4-moderate-master-disable-ctrlaltdel-reboot| high| FAIL
+| rhcos4-moderate-master-enable-fips-mode| high| FAIL
+| rhcos4-moderate-master-no-empty-passwords| high| FAIL
+| rhcos4-moderate-worker-configure-crypto-policy| high| FAIL
+| rhcos4-moderate-worker-coreos-pti-kernel-argument| high| FAIL
+| rhcos4-moderate-worker-disable-ctrlaltdel-burstaction| high| FAIL
+| rhcos4-moderate-worker-disable-ctrlaltdel-reboot| high| FAIL
+| rhcos4-moderate-worker-enable-fips-mode| high| FAIL
+| rhcos4-moderate-worker-no-empty-passwords| high| FAIL
+|===
+
+[[node_remediate]]
+== Node Remediation with the OpenShift Compliance Operator
+
+[[cluster_rbac]]
+== Configuring Role-based Access Control for Cluster Roles
+
+== Summary

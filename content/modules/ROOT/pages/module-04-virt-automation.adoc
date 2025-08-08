@@ -14,7 +14,7 @@ Your admin login is available with the following credentials:
 * *User:* `{aap_controller_admin_user}`
 * *Password* `{aap_controller_admin_password}`
 
-image::module-04-virt-automation/02-aap_login.png[title="AAP Login", link=self, window=blank, width=100%]
+image::module-04-virt-automation/01-aap_login.png[title="AAP Login", link=self, window=blank, width=100%]
 
 NOTE: The Ansible Automation Platform console has a 5 minute timeout for admin users for security purposes. If you find yourself logged out accidentally you can log back in using the credentials above.
 
@@ -31,11 +31,11 @@ In this lab, we will configure a dynamic inventory to pull data from OpenShift V
 
 . In the left-side menu, click to expand the menu for *Automation Execution*, then click on *Infrastructure*, followed by *Inventories*.
 +
-image::module-04-virt-automation/03-auto_infra_inv.png[title="Automation Execution, Infrastucture, Inventories", link=self, window=blank, width=100%]
+image::module-04-virt-automation/02-auto_infra_inv.png[title="Automation Execution, Infrastucture, Inventories", link=self, window=blank, width=100%]
 +
 . Click the *Create inventory* drop-down box and select the *Create inventory* option.
 +
-image::module-04-virt-automation/04-create_inventory_dropdown.png[title="Create Inventory Dropdown", link=self, window=blank, width=100%]
+image::module-04-virt-automation/03-create_inventory_dropdown.png[title="Create Inventory Dropdown", link=self, window=blank, width=100%]
 +
 . Fill out or select the appropriate value from the drop down menus available for the following fields in the *Create Inventory* form:
    * *Name:* `OpenShift Virtual Machines`
@@ -43,7 +43,7 @@ image::module-04-virt-automation/04-create_inventory_dropdown.png[title="Create 
 +
 . Click the *Create inventory* button at the bottom.
 +
-image::module-04-virt-automation/05-create_inventory.png[title="Create Inventory", link=self, window=blank, width=100%]
+image::module-04-virt-automation/04-create_inventory.png[title="Create Inventory", link=self, window=blank, width=100%]
 
 === Add a Source to the Inventory
 
@@ -51,7 +51,7 @@ image::module-04-virt-automation/05-create_inventory.png[title="Create Inventory
 +
 . Select the *Create source* button.
 +
-image::module-04-virt-automation/06-sources_tab.png[title="Sources Tab", link=self, window=blank, width=100%]
+image::module-04-virt-automation/05-sources_tab.png[title="Sources Tab", link=self, window=blank, width=100%]
 +
 . Fill out or select the appropriate value from the drop down menus available for the following fields in the *Create Source* form:
    * *Name:* OpenShift Virtual Machines Source
@@ -71,29 +71,29 @@ namespaces:
 +
 . Click the *Create source* button to save the configuration.
 +
-image::module-04-virt-automation/07-create_inventory_source.png[title="Create Inventory Source", link=self, window=blank, width=100%]
+image::module-04-virt-automation/06-create_inventory_source.png[title="Create Inventory Source", link=self, window=blank, width=100%]
 
 ===  Update the Inventory
 . Click the *Launch Inventory Update* button in the top-right corner to start inventory collection.
 +
-image::module-04-virt-automation/08-update_inventory.png[title="Update Inventory", link=self, window=blank, width=100%]
+image::module-04-virt-automation/07-update_inventory.png[title="Update Inventory", link=self, window=blank, width=100%]
 +
 . Wait for the *Last Job Status* to show *Success*.
 +
-image::module-04-virt-automation/09-job_status_success.png[title="Job Status Success", link=self, window=blank, width=100%]
+image::module-04-virt-automation/08-job_status_success.png[title="Job Status Success", link=self, window=blank, width=100%]
 +
 . Click on the tab for *Back to Inventory Sources*.
 +
-image::module-04-virt-automation/10-back_to_inventory_sources.png[title="Back to Inventory Sources", link=self, window=blank, width=100%]
+image::module-04-virt-automation/09-back_to_inventory_sources.png[title="Back to Inventory Sources", link=self, window=blank, width=100%]
 +
 . Switch to the *Hosts* tab at the top of the screen.
 . Confirm that the Virtual Machines from the *vms-app-day2* namespace of your OpenShift cluster are listed as inventory hosts.
 +
-image::module-04-virt-automation/11-verify_hosts.png[title="Verify Hosts", link=self, window=blank, width=100%]
+image::module-04-virt-automation/10-verify_hosts.png[title="Verify Hosts", link=self, window=blank, width=100%]
 +
 . To verify that the machines are alive we can select the three VMs we have discovered and run an automated *ping* job against them by clicking the *Run command* button.
 +
-image::module-04-virt-automation/12-run_command.png[title="Run Command", link=self, window=blank, width=100%]
+image::module-04-virt-automation/11-run_command.png[title="Run Command", link=self, window=blank, width=100%]
 +
 . You will be presented with the *Run command* wizard with several pages:
    * On the *Details* page, select *ping* from the *Module* dropdown menu, and click *Next*.
@@ -101,7 +101,7 @@ image::module-04-virt-automation/12-run_command.png[title="Run Command", link=se
    * On the *Credential* page, select *Workshop Credential* from the *Credential* dropdown, and click *Next*.
    * On the *Review* page, check over your selected options, and when you are ready click the *Finish* button.
 +
-image::module-04-virt-automation/13-review_run_command.png[title="Review Run Command", link=self, window=blank, width=100%]
+image::module-04-virt-automation/12-review_run_command.png[title="Review Run Command", link=self, window=blank, width=100%]
 +
 . The output of running the command should be similar to the output below, including the names of each VM and their status:
 +
@@ -129,7 +129,7 @@ vms-aap-day2-rhel9-vm3 | SUCCESS => {
 }
 ----
 +
-image::module-04-virt-automation/14-ping_success.png[title="Ping Success", link=self, window=blank, width=100%]
+image::module-04-virt-automation/13-ping_success.png[title="Ping Success", link=self, window=blank, width=100%]
 +
 NOTE: You may also confirm the VMs are running in a manual manner by logging into your OpenShift console, and viewing the virtual machines there manually.
 
@@ -139,7 +139,7 @@ NOTE: You may also confirm the VMs are running in a manual manner by logging int
 . Highlight the *vms-aap-day2* project in the central navigation column.
 . Confirm that the virtual machines are running.
 +
-image::module-04-virt-automation/15-vm_inventory_openshift.png[title="Virtual Machines Running on OpenShift", link=self, window=blank, width=100%]
+image::module-04-virt-automation/14-vm_inventory_openshift.png[title="Virtual Machines Running on OpenShift", link=self, window=blank, width=100%]
 
 [[vm_mgmt_power]]
 == Automated VM Management
@@ -304,7 +304,7 @@ In this section, you will make use of the Ansible Automation Platform (AAP) dash
 
 . In the OpenShift console, use the left side navigation menu and click on *Virtualization* and then *VirtualMachines*. In the center column, click on the *vms-aap-day2* project and verify that all three VMs are currently running.
 +
-image::module-04-virt-automation/55a-running_vms.png[title="Running AAP VMs", link=self, window=blank, width=100%]
+image::module-04-virt-automation/15-running_vms.png[title="Running AAP VMs", link=self, window=blank, width=100%]
 +
 . Return to the tab where you have Ansible Automation Platform open. If your previous login has timed out, or you have accidentally closed the window, the information to login again is here:
 +
@@ -337,19 +337,19 @@ image::module-04-virt-automation/56-create_job_template.png[title="Create Job Te
 +
 . Once filled out, click the *Create job template* button.
 +
-image::module-04-virt-automation/57-stop_vms_template.png[title="Stop VMs Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/16-stop_vms_template.png[title="Stop VMs Template", link=self, window=blank, width=100%]
 +
 . Once the *Stop VMs* Job Template is created, select the *Launch template* button on the top right corner to run the job.
 +
-image::module-04-virt-automation/58-launch_stop_vms.png[title="Launch Stop VMs Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/17-launch_stop_vms.png[title="Launch Stop VMs Template", link=self, window=blank, width=100%]
 +
 . The job will start running, and once it is successful you will see changes displayed in yellow.
 +
-image::module-04-virt-automation/59-successful_job.png[title="Successful Job", link=self, window=blank, width=100%]
+image::module-04-virt-automation/18-successful_job.png[title="Successful Job", link=self, window=blank, width=100%]
 +
 . Return to the OpenShift console to see that the virtual machines in the *vms-aap-day2* project have all now stopped.
 +
-image::module-04-virt-automation/60-stopped_vms.png[title="Stopped VMs", link=self, window=blank, width=100%]
+image::module-04-virt-automation/19-stopped_vms.png[title="Stopped VMs", link=self, window=blank, width=100%]
 +
 . Return to the AAP Dashboard, and repeat this process to create the *Start VMs* and *Restart VMs* Ansible Job Templates. The details for each is provided below.
 
@@ -447,7 +447,7 @@ Now lets connect all the pieces through the AAP web interface and run the automa
 . Using the left side navigation bar, click on *Automation Execution* and then *Templates*.
 . Click on the *Create template* button, and then select *Create job template* from the dropdown menu.
 +
-image::module-04-virt-automation/61-create_job_template.png[title="Stop VMs Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/21-create_job_template.png[title="Stop VMs Template", link=self, window=blank, width=100%]
 +
 . On the *Create job template* page, fill out the following fields:
 +
@@ -470,12 +470,12 @@ IMPORTANT: Notice there are two credentials attached and privilege escalation is
 +
 . Once the form is filled out, click the *Create job template* button.
 +
-image::module-04-virt-automation/62-create_patch_template.png[title="Create Patch Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/22-create_patch_template.png[title="Create Patch Template", link=self, window=blank, width=100%]
 +
 . Once created, click *Launch Template* button in the top-right corner to start the job.
 . When the *Patch VMs* job has completed successfully, you should see output similar to:
 +
-image::module-04-virt-automation/63-patch_vm.png[title="Patch VM", link=self, window=blank, width=100%]
+image::module-04-virt-automation/23-patch_vm.png[title="Patch VM", link=self, window=blank, width=100%]
 
 ==== Reviewing the Job Output
 
@@ -487,11 +487,11 @@ After the job runs, you’ll be able to see:
 
 . Under the *TASK* for *Update security-related packages on all hosts*, click on *vms-aap-day2-rhel9-vm1*.
 +
-image::module-04-virt-automation/64-patch_complete.png[title="Patching Complete", link=self, window=blank, width=100%]
+image::module-04-virt-automation/24-patch_complete.png[title="Patching Complete", link=self, window=blank, width=100%]
 +
 . You will be presented with additional *Details* about the task, and be able to validate that system was indeed patched by our automation job by clicking on the *Data* tab.
 +
-image::module-04-virt-automation/65-patch_details.png[title="Patch Details", link=self, window=blank, width=100%]
+image::module-04-virt-automation/25-patch_details.png[title="Patch Details", link=self, window=blank, width=100%]
 
 [[vm_mgmt_hp]]
 === Hot-Plugging CPU and Memory Resources
@@ -529,7 +529,7 @@ To determine whether a VM is created with an instance type or not, follow these 
    - *Instance Type*: If the VM uses an instance type, this field will display the name of the instance type applied to the VM (e.g., u1.small).
    - *Template*: If no instance type is used, this field will display either None or the name of the template used to create the VM.
 +
-image::module-04-virt-automation/66-vm_details.png[title="VM Details", link=self, window=blank, width=100%]
+image::module-04-virt-automation/26-vm_details.png[title="VM Details", link=self, window=blank, width=100%]
 
 The instance_type method is the recommended approach for hot-plugging resources into a VM. It ensures consistent and reusable resource configurations across multiple VMs while leveraging the powerful features of OpenShift Virtualization.
 
@@ -595,7 +595,7 @@ NOTE: Classic VMs are not a part of this lab exercise, and the Classic Method is
 . Within the AAP UI Dashboard, use the left side menu to navigate to *Automation Execution* and then click on *Templates*.
 . Click *Create Template* and select *Create job template* from the dropdown menu that appears.
 +
-image::module-04-virt-automation/67-create_template.png[title="Create Job Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/27-create_template.png[title="Create Job Template", link=self, window=blank, width=100%]
 +
 . Fill in the following details to create a job template:
 +
@@ -616,15 +616,15 @@ image::module-04-virt-automation/67-create_template.png[title="Create Job Templa
 +
 . When the details are filled out, click *Create Job Template*.
 +
-image::module-04-virt-automation/68-create_hotadd_template.png[title="Create HotAdd Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/28-create_hotadd_template.png[title="Create HotAdd Template", link=self, window=blank, width=100%]
 +
 . Launch the job by selecting the *Launch Template* button from the top-right corner. When the job completes you should see output that shows it was able to modify the virtual machines instance type.
 +
-image::module-04-virt-automation/69-hotadd_template_success.png[title="HotAdd Template Success", link=self, window=blank, width=100%]
+image::module-04-virt-automation/29-hotadd_template_success.png[title="HotAdd Template Success", link=self, window=blank, width=100%]
 +
 . When the job completes, return to the OpenShift console and view the details of the rhel9-vm1 Virtual Machine once again. You should see that the *InstanceType* field has changed and is now set to *u1.2xmedium*.
 +
-image::module-04-virt-automation/70-vm_modified_instancetype.png[title="VM InstanceType Modified ", link=self, window=blank, width=100%]
+image::module-04-virt-automation/30-vm_modified_instancetype.png[title="VM InstanceType Modified ", link=self, window=blank, width=100%]
 
 [[vm_mgmt_backup]]
 === Backup and Restore Virtual Machines
@@ -766,7 +766,7 @@ Now let's connect all the pieces through the AAP web interface and run the snaps
 
 . Click *Create Job Template*.
 +
-image::module-04-virt-automation/71-create-snapshot.png[title="Create Snapshot Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/31-create-snapshot.png[title="Create Snapshot Template", link=self, window=blank, width=100%]
 +
 . Launch the job by selecting *Launch Template* from the top-right corner.
 
@@ -780,7 +780,7 @@ Once the Job completes successfully, confirm the new Snapshot has been created.
 
 . Verify that the snapshot appears in the list.
 +
-image::module-04-virt-automation/72-ocp-snapshot-details.png[title="Snapshot Details", link=self, window=blank, width=100%]
+image::module-04-virt-automation/32-ocp-snapshot-details.png[title="Snapshot Details", link=self, window=blank, width=100%]
 
 === Understanding the Provided Restoration Task Files
 
@@ -910,7 +910,7 @@ WARNING: Replace `<snapshot_name>` with the actual name of your snapshot created
 
 . Click *Create Job Template*.
 +
-image::module-04-virt-automation/73-restore-snapshot.png[title="Restore Snapshot Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/33-restore-snapshot.png[title="Restore Snapshot Template", link=self, window=blank, width=100%]
 
 . Launch the template by clicking *Launch Template*.
 
@@ -924,9 +924,9 @@ Once the Job completes successfully, confirm the restoration was applied.
 
 . Locate the snapshot you restored and verify the *Last restored* column shows the recent restoration timestamp.
 +
-image::module-04-virt-automation/74-ocp-restore-snapshot-details.png[title="Restore Snapshot Details", link=self, window=blank, width=100%]
+image::module-04-virt-automation/34-ocp-restore-snapshot-details.png[title="Restore Snapshot Details", link=self, window=blank, width=100%]
 
 == Summary
 
-In this module you have spent a day in the life of an OpenShift Virtualization administrator making use of Ansible Automation Platform to automate a number of administrative tasks that staff experience often on a day-to-day basis.
+In this module you have spent a day in the life of an OpenShift Virtualization administrator making use of Ansible Automation Platform to automate a number of administrative tasks that staff experience often on a day-to-day basis from discovering a dynamic inventory of the virtual machines available to manage, to ensuring they are safely backed up and restored in a disaster recovery scenario.
 

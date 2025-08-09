@@ -49,7 +49,7 @@ Outside of the physical cluster resources, it's also very important to be able t
 NOTE: For this part of the lab, we are going to use an application to generate additional load on some of our virtual machines so that we can see how graphs are generated.
 
 . Using the left side navigation menu click on *Workloads* followed by *Deployments*.
-. Make sure to ensure you are in Project: *windows-vms*.
+. Make sure that you are in the Project: *webapp-vms*.
 . You should see one pod deployed here called *loadmaker*.
 +
 image::module-01-perf-scale-ts/04-select_loadmaker.png[title="Loadmaker Deployment", link=self, window=blank, width=100%]
@@ -65,7 +65,7 @@ image::module-01-perf-scale-ts/06-lm_pod_config.png[title="LM Pod Config", link=
 . Now lets go check on the VM's that we are generating load against.
 . On the left side navigation menu click on *Virtualization* and then *VirtualMachines*. Select the *windows-vms* project in the center column. You should see three virtual machines: *winweb01*, *winweb02*, and *database*.
 +
-image::module-01-perf-scale-ts/07-webapp_vms.png[title="Windows VMs", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/07-webapp_vms.png[title="WebApp VMs", link=self, window=blank, width=100%]
 +
 IMPORTANT: At this point in the lab only *database* and *winweb01* should be powered on. If they are off, please power them on now. Do not power on *winweb02* for the time being.
 +
@@ -84,7 +84,7 @@ image::module-01-perf-scale-ts/09-select_network.png[title="Select Network", lin
 +
 image::module-01-perf-scale-ts/10-select_cpu.png[title="Select CPU", link=self, window=blank, width=100%]
 +
-. This will launch the *Metrics* window which will allow you to see more details about the CPU utilization. By default this is set to 30 minutes, but you can click on the drop down and change that to 1 hour to see the spike in the graph once we turned on the load generator.
+. This will launch the *Metrics* window which will allow you to see more details about the CPU utilization. By default this is set to 30 minutes, which should show the spike in CPU utilization since we've turned on the load generator, but you can also click on the drop down and change that to 1 hour in case you need a more distant view.
 +
 image::module-01-perf-scale-ts/11-cpu_metrics.png[title="CPU Metrics", link=self, window=blank, width=100%]
 +
@@ -101,10 +101,10 @@ image::module-01-perf-scale-ts/13-add_query.png[title="Add_Query", link=self, wi
 +
 [source,sh,role=execute]
 ----
-sum(rate(kubevirt_vmi_vcpu_wait_seconds_total{name='winweb01',namespace='windows-vms'}[5m])) BY (name, namespace)
+sum(rate(kubevirt_vmi_vcpu_wait_seconds_total{name='winweb01',namespace='webapp-vms'}[5m])) BY (name, namespace)
 ----
 +
-. Click the *Run queries* button and see how the graph updates. A new line graph will appear showing that the vCPU on the guest is never not under load.
+. Click the *Run queries* button and see how the graph updates. A new line graph will along the bottom of the chart which shows that since the machine has started, there has never been a case where it was not under severe load. Our load generator is working as intended to really hammer the VM.
 +
 image::module-01-perf-scale-ts/14-example_query.png[title="Sample Custom Query", link=self, window=blank, width=100%]
 
@@ -132,9 +132,9 @@ image::module-01-perf-scale-ts/22-metrics_select.png[title="Select Metrics", lin
 Now that we have completed this section determining how to locate and display alerts, performance metrics, and graphs about our nodes and workloads, we can leverage these skills in the future in order to troubleshoot our own OpenShift Virtualization environments.
 
 [[vm_resource_util]]
-== Examining Resource Utilization on Virtual Machines
+== Troubleshooting Resource Utilization on Virtual Machines
 
-The winweb01, winweb02, and database servers work together to provide a simple web-based application that load-balances web requests between the two web servers to reduce load and increase performance. At this time, only one webserver is up, and is now under high demand. In this lab section we will see horizontally scaling the webservers can help reduce load on the VMs, and how to diagnose this using metrics, and graphs that are native to OpenShift Virtualization.
+The winweb01, winweb02, and database servers work together to provide a simple web-based application that load-balances web requests between the two web servers to reduce load and increase performance. At this time, only one webserver is up, and as we have previously explored is now under high demand. In this lab section we will see horizontally scaling the webservers can help reduce load on the VMs, and how to diagnose this using the metrics, and graphs that are native to OpenShift Virtualization.
 
 . Click on *winweb01* which should currently be running. This will bring you to the *VirtualMachine details* page.
 +
@@ -163,14 +163,14 @@ image::module-01-perf-scale-ts/27-load_reducing.png[title="Load Reducing", link=
 +
 [source,sh,role=execute]
 ----
-sum(rate(kubevirt_vmi_cpu_usage_seconds_total{name='winweb02',namespace='windows-vms'}[5m])) BY (name, namespace)
+sum(rate(kubevirt_vmi_cpu_usage_seconds_total{name='winweb02',namespace='webapp-vms'}[5m])) BY (name, namespace)
 ----
 +
 . Click the *Run queries* button and examine the updated graph that appears.
 +
 image::module-01-perf-scale-ts/28-load_sharing.png[title="Load Sharing", link=self, window=blank, width=100%]
 
-We can see by examining the graphs that *winweb02* is now under much more load than *winweb01* but over the next 5 minutes or so the load will level out and balance on the two virtual machines. 
+We can see by examining the graphs that *winweb02* is introduced and takes on a large amount of load that *winweb01* was originally holding alone. After a few minutes, the load has leveled out between the two virtual machines as they balance the web requests.
 
 [[vert_scale_vm]]
 == Vertically Scaling VM Resources
@@ -193,12 +193,12 @@ image::module-01-perf-scale-ts/31-edit_vm.png[title="Edit VM", link=self, window
 +
 image::module-01-perf-scale-ts/32-update_specs.png[title="Update Specs", link=self, window=blank, width=100%]
 +
-. Click back on the *Overview* tab. You will see that the CPU | Memory section in the details has been updated to the new value, and that the CPU utilization on the guest gradually drops quite quickly.
+. Click back on the *Overview* tab. You will see that the CPU | Memory section in the details has been updated to the new value, and that the CPU utilization on the guest gradually drops quite quickly now that there are more available resources.
 +
 image::module-01-perf-scale-ts/33-vm_new_spec.png[title="New VM Spec", link=self, window=blank, width=100%]
 +
 . Repeat these steps for *winweb02*.
-. Once both vms are upgraded, click on *windows-vms* project. You will see that the CPU usage dropped dramatically.
+. Once both vms are upgraded, click on *webapp-vms* project. You will see that the CPU usage dropped dramatically.
 +
 image::module-01-perf-scale-ts/34-updated_usage.png[title="Updated Utilization", link=self, window=blank, width=100%]
 +
@@ -213,23 +213,23 @@ NOTE: This section of the lab is just informative for what we may do in a scenar
 
 Some times you don't have the ability to increase CPU or memory resources to a specific workload because you have exhausted all of your physical resources. By default, OpenShift has an overcommit ratio of 10:1 for CPU, however memory in a Kubernetes environment is often a finite resource.
 
-When a normal kubernetes cluster encounters an out of memory scenario due to high workload resource utilization, it begins to kills pods indescriminately. In a container-based application environment, this is usually mitigated by having multiple replicas of an application behind a load balancer service. The application stays available served by other replicas, and the killed pod is reassigned to a node with free resources.
+When a normal kubernetes cluster encounters an out of memory scenario due to high workload resource utilization, it begins to kills pods indescriminately. In a container-based application environment, this is usually mitigated by having multiple replicas of an application behind a load balancer service. The application stays available served by other replicas, and the killed pod is reassigned to a node with free resources usually resulting in no noticable effect on the application's performance to the end user.
 
-This doesn't work that well for virtual machine workloads which in most cases are not composed of many replicas, and need to be persistently available.
+This doesn't work that well for virtual machine workloads which in most cases are not composed of many replicas, and often need to be persistently available.
 
 If you have exhausted the physical resources in your cluster the traditional option is to scale the cluster, but many times this is much easier said than done. If you don't have a spare physical node on standby to scale, and have to order new hardware, you can often be delayed by procurement procedures or supply chain disruptions.
 
-One workaround for this is to temporarily enable SWAP/Memory Overcommit on your nodes so that you can buy time until the new hardware arrives, this allows for the worker nodes to SWAP and use hard disk space to write application memory. While writing to hard disk is much much slower than writing to system memory, it does allow to preserve workloads until additional resources can arrive.
+One workaround for this is to temporarily enable SWAP/Memory Overcommit on your nodes so that you can buy time until the new hardware arrives, this allows for the worker nodes to SWAP and use hard disk space to write application memory. While writing to hard disk is much much slower than writing to system memory, and this is not an ideal scenario, it is possible to enable it for emergency situations, and it does allow you to preserve workloads until additional resources can arrive and be made available.
 
 [[cluster_scale]]
 == Scaling a Cluster By Adding a Node.
 
-The primary recourse when you have run out of physical resources on the cluster is the scale the cluster by adding additional worker nodes. This can then allow for workloads that are failing or cannot be assigned to be assigned successfully. This section of the lab is dedicated to just this idea, we will overload our cluster, and then add a new node to allow all VMs to run successfully.
+In an OpenShift cluster, the primary recourse when you have run out of physical resources is to scale the cluster by adding additional worker nodes. This can then allow for workloads that are failing or cannot be assigned to be assigned successfully. This section of the lab is dedicated to just this idea, we will overload our cluster, and then add a new node to allow all of our VMs to run successfully.
 
 NOTE: In this lab environment we are not actually adding an additional physical node, we are simulating the behavior by having a node on standby which is tainted to not allow VM workloads. At the appropriate time we will remove this taint, thus simulating the addition a new node to our cluster.
 
 . In the left side navigation menu, click on *Virtualization* and then *VirtalMachines*. 
-. Ensure that all VMs in *vms-aap-day2* and *windows-vms* projects are powered on. 
+. Ensure that all VMs in *vms-aap-day2* and *webapp-vms* projects are powered on. 
 +
 image::module-01-perf-scale-ts/36-verify_oc.png[title="Verify Running VMs", link=self, window=blank, width=100%]
 +

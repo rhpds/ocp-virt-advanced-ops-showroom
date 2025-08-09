@@ -2,7 +2,7 @@
 
 * xref:module-01-perf-scale-ts.adoc[Performance, Scalability, and Troubleshooting]
 ** xref:module-01-perf-scale-ts.adoc#alerts_graphs_logs[Enable and Explore Alerts, Graphs, and Logs]
-** xref:module-01-perf-scale-ts.adoc#vm_resource_util[Examining Resource Utilization on Virtual Machines]
+** xref:module-01-perf-scale-ts.adoc#vm_resource_util[Troubleshooting Resource Utilization on Virtual Machines]
 ** xref:module-01-perf-scale-ts.adoc#horz_scale_vm[Horizontally Scaling VM Resources]
 ** xref:module-01-perf-scale-ts.adoc#vert_scale_vm[Vertically Scaling VM Resources]
 ** xref:module-01-perf-scale-ts.adoc#swap_mem[Discussing Swap/Memory Overcommit]

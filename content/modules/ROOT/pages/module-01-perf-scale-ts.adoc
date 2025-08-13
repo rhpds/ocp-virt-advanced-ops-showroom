@@ -308,6 +308,8 @@ In order to remedy this, another feature we can take advantage of in OpenShift V
 
 In this section we are going to demonstrate OpenShift's load aware rebalancing feature by introducing another idle node, this time without the cluster being over-provisioned, and we are going to generate load against our virtual machines which will lead to the cluster re-balacing the workloads in an automated fashion.
 
+NOTE: Load-aware rebalancing has already been configured on this cluster, this is just an exercise that allows us to see the feature in action.
+
 === Add an Additional Node to the Cluster
 
 . The first step we want to perform is to repeat the step we did in the earlier section by removing the taint from worker node 2 in our cluster. Do so by clicking on *Compute* followed by *Nodes* and click on worker node 2.
@@ -323,6 +325,7 @@ image::module-01-perf-scale-ts/53-node_2_details.png[title="Node 2 Details", lin
 image::module-01-perf-scale-ts/54-node_2_taint.png[title="Node 2 Taint", link=self, window=blank, width=100%]
 +
 . In the window that pops up, click the *minus* sign to remove the taint, and then click the *Save* button.
++
 image::module-01-perf-scale-ts/55-node_2_taint_window.png[title="Remove Taint Window", link=self, window=blank, width=100%]
 +
 . With the taint removed, we now need to increase the utilization on the cluster in order to trigger automatic rebalancing of the workloads. 
@@ -346,20 +349,21 @@ for i in {1..12}; do oc scale deployment/loadmaker-$i --replicas=6 -n mass-vms; 
 +
 image::module-01-perf-scale-ts/57-scale_loadmaker.png[title="CLI Scale Deployment", link=self, window=blank, width=100%]
 +
-. Return to the virtual machine view by clicking on *Virtualization* and *VirtualMachines* in the left side menu, and click on the filter drop down. You can watch this view update in realtime.
-+
-NOTE: Default configuration for load aware rebalacing is to refresh every 5 minutes, but for our lab we've tuned this variable to 30 seconds to make it easier to visualize.
+. Return to the virtual machine view by clicking on *Virtualization* and *VirtualMachines* in the left side menu, click on *All projects* and finally  click on the *Filter* drop down. 
+. You can watch this view update in realtime, in a minute or two node 2 should appear and it's guest count should begin to rise as VMs are live migrated to the node.
 +
 image::module-01-perf-scale-ts/58-vms_on_nodes_2.png[title="OpenShift Web Terminal", link=self, window=blank, width=100%]
 +
-. You can also check on the status of any node evacuations by running the following command in the OpenShift Web Terminal.
+NOTE: Default configuration for load-aware rebalacing is to refresh every 5 minutes, but for our lab we've tuned this variable to 30 seconds to make it easier to visualize in a shorter time period.
++
+. You can also check on the status of any node evacuations across all namespaces by running the following command in the OpenShift Web Terminal.
 +
 [source,sh,role=execute]
 ----
 oc get vmim -A
 ----
 +
-NOTE: The command above has a long history and may show quite a view VM evacuations as we have scaled the cluster multiple times.
+NOTE: The command above has a long history and may show quite a view VM evacuations as we have scaled the cluster multiple times during this module.
 +
 image::module-01-perf-scale-ts/59-kubevirt_evac.png[title="KubeVirt Evacuation List", link=self, window=blank, width=100%]
 

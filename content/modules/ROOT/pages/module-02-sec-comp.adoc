@@ -197,7 +197,6 @@ image::module-02-sec-comp/28-create_binding.png[title="Create Binding", link=sel
   * *Role name:* view
 +
 image::module-02-sec-comp/29-role_binding_details.png[title="RoleBinding Details", link=self, window=blank, width=100%]
-+
 
 === Create the User Accounts
 
@@ -224,47 +223,48 @@ auditor1:$apr1$VtSYSShP$CikLVoVy5sobCaHCvuxCv.
 auditor2:$apr1$4Vpe3O5u$OhjtFGDNHnl2RWiNnhlhZ0
 ----
 +
-image::module-02-sec-comp/29-add_identity_provider.png[title="Add Identity Provider", link=self, window=blank, width=100%]
+image::module-02-sec-comp/33-add_identity_provider.png[title="Add Identity Provider", link=self, window=blank, width=100%]
 +
 . Once added you will be returned to the Cluster OAuth details page and you will now see two identity providers listed, along with a blue notice that OAuth is being reconfigured. Click on the link provided for *View authentication conditions for reconfiguration status*.
 +
-image::module-02-sec-comp/33-oauth_reconfig.png[title="OAuth Reconfiguration", link=self, window=blank, width=100%]
+image::module-02-sec-comp/34-oauth_reconfig.png[title="OAuth Reconfiguration", link=self, window=blank, width=100%]
 +
 . You will be brought to a page that shows the progress as the authentication cluster operator is reconfigured, once all the pods are restarted, the status will change to *Available* and the message will say *All is well*.
 +
-image::module-02-sec-comp/34-oauth_reconfig_2.png[title="OAuth Reconfiguration Progressing", link=self, window=blank, width=100%]
+image::module-02-sec-comp/35-oauth_reconfig_2.png[title="OAuth Reconfiguration Progressing", link=self, window=blank, width=100%]
 +
-image::module-02-sec-comp/35-oauth_reconfig_3.png[title="OAuth Reconfiguration Complete", link=self, window=blank, width=100%]
+image::module-02-sec-comp/36-oauth_reconfig_3.png[title="OAuth Reconfiguration Complete", link=self, window=blank, width=100%]
 
-=== Testing our Configuration
+=== Testing the Configuration
 
 . With the OAuth configuration complete, we can now test our auditor login, and the limits of their account.
 . Log out of Red Hat OpenShift by clicking on *admin* at the top, and selecting *Log out* from the drop down menu.
 +
-image::module-02-sec-comp/36-logout_openshift.png[title="Log Out OpenShift", link=self, window=blank, width=100%]
+image::module-02-sec-comp/37-logout_openshift.png[title="Log Out OpenShift", link=self, window=blank, width=100%]
 +
 . There is now an option to login with the *auditor_login* identity provider on the main OpenShift page.
 +
-image::module-02-sec-comp/37-login_openshift.png[title="Log In OpenShift", link=self, window=blank, width=100%]
+image::module-02-sec-comp/38-login_openshift.png[title="Log In OpenShift", link=self, window=blank, width=100%]
 +
 . Click on *auditor_login* and when presented use the following username and password combination:
   * *Username:* auditor1
   * *Password:* auditor1pass!
 +
-image::module-02-sec-comp/38-auditor1_login.png[title="Auditor 1 Login", link=self, window=blank, width=100%]
+image::module-02-sec-comp/39-auditor1_login.png[title="Auditor 1 Login", link=self, window=blank, width=100%]
 +
 . When the auditor logs in with the read-only persmissions they will only be able to see a limited view of the OpenShift console from the Admin perspective.
 +
-image::module-02-sec-comp/39-auditor1_admin_view.png[title="Auditor 1 Admin View", link=self, window=blank, width=100%]+
+image::module-02-sec-comp/40-auditor1_admin_view.png[title="Auditor 1 Admin View", link=self, window=blank, width=100%]+
++
 . If the auditor needs to validate our virtual machine environment, they can still access that by clicking on *Virtualization* and *VirtualMachines* in the left side menu.
 . They can see all virtual machines in each project, and their current status.
 . The auditor can even click on a specific machine and get additional details. In this case, they want to test the *database* server in the *webapp-vms* namespace.
 +
-image::module-02-sec-comp/40-auditor1_vm_view.png[title="Auditor 1 VM View", link=self, window=blank, width=100%]
+image::module-02-sec-comp/41-auditor1_vm_view.png[title="Auditor 1 VM View", link=self, window=blank, width=100%]
 +
 . Once they are on the VirtualMachine details page they can see the information about the virtual guest, including it's CPU and memory utilization, but they are prevented from launching the VNC console, or manipulating the machine state in any way as the buttons are greyed out.
 +
-image::module-02-sec-comp/41-auditor1_database_readonly.png[title="Auditor 1 Database ReadOnly", link=self, window=blank, width=100%]
+image::module-02-sec-comp/42-auditor1_database_readonly.png[title="Auditor 1 Database ReadOnly", link=self, window=blank, width=100%]
 +
 . At your leisure you may explore the UI and confirm that the Auditor1 account is read only. When you are finished proceed to the next module.
 

@@ -254,7 +254,7 @@ image::module-02-sec-comp/39-auditor1_login.png[title="Auditor 1 Login", link=se
 +
 . When the auditor logs in with the read-only persmissions they will only be able to see a limited view of the OpenShift console from the Admin perspective.
 +
-image::module-02-sec-comp/40-auditor1_admin_view.png[title="Auditor 1 Admin View", link=self, window=blank, width=100%]+
+image::module-02-sec-comp/40-auditor1_admin_view.png[title="Auditor 1 Admin View", link=self, window=blank, width=100%]
 +
 . If the auditor needs to validate our virtual machine environment, they can still access that by clicking on *Virtualization* and *VirtualMachines* in the left side menu.
 . They can see all virtual machines in each project, and their current status.

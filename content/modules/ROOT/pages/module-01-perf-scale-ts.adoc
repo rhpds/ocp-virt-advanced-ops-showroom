@@ -367,6 +367,13 @@ NOTE: The command above has a long history and may show quite a view VM evacuati
 +
 image::module-01-perf-scale-ts/59-kubevirt_evac.png[title="KubeVirt Evacuation List", link=self, window=blank, width=100%]
 
+IMPORTANT: In order for the rest of the lab to complete without issues we need to scale back down the load generator pods so that they aren't causing an adverse effect on the environment. Please do so with the following syntax:
+
+[source,sh,role=execute]
+----
+for i in {1..12}; do oc scale deployment/loadmaker-$i --replicas=0 -n mass-vms; done
+----
+
 == Summary
 
 In this module you have worked as an OpenShift Virtualization administrator needing to simulate a high load scenario which you were able to remediate by horizontally and vertically scaling virtual machine resources. You also were able to solve an issue where you had run low on physical cluster resources and were unable to provision new virtual machines by scaling up your cluster to provide additional resources. Lastly you saw that you could further test the boundaries of your physical cluster by generating additional load and observing your virtual machines' ability to perform load-aware balancing across your now expanded cluster.

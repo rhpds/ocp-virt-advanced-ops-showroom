@@ -2,7 +2,7 @@
 
 == Introduction
 
-The Mega-Sale was a success, but now, a critical security audit is looming. We need to demonstrate strict adherence to industry compliance standards for all our virtualized workloads. Our challenge is to ensure a unified approach to security across both VMs and containers. In this module we will be tasked with scanning our infrastructure with the OpenShift Compliance Operator and remediating any reported vulnerabilities to ensure that our cluster meets our strict security standards. We will also configure distinct user accounts and access roles for members of our team that need limited access to our virtualization infrastructure.
+The Mega-Sale was a success, but now, a critical security audit is looming. We need to demonstrate strict adherence to industry compliance standards for all our virtualized workloads. Our challenge is to ensure a unified approach to security across both VMs and containers. In this module we will be tasked with scanning our infrastructure with the OpenShift Compliance Operator and remediating any reported vulnerabilities to ensure that our cluster meets our strict security standards. We will also configure distinct user accounts and access roles to be used by the security auditors that only need limited access to our virtualization infrastructure.
 
 [[scan_comp]]
 == Scanning Infrastructure with the OpenShift Compliance Operator
@@ -23,14 +23,13 @@ image::module-02-sec-comp/03-compliance_details.png[title="Compliance Details", 
 +
 image::module-02-sec-comp/04-scansetting_button.png[title="Create ScanSetting Button", link=self, window=blank, width=100%]
 +
-. On the *Create ScanSetting* page, set the name of the scan to `scan01`.
-Then click the *YAML view* radio button.
+. On the *Create ScanSetting* page, set the name of the scan to `scan01`. Then click the *YAML view* radio button.
 +
 image::module-02-sec-comp/05-create_scansetting.png[title="Create Scansetting", link=self, window=blank, width=100%]
 +
 . In the ScanSetting YAML details, make note of the following values that are set by default:
   * The *autoApplyRemediations* field is set to *false*.
-  * The *roles* to be scanned by default include both *worker* and *master* nodes.
+  * The *roles* to be scanned by default include only *worker* nodes.
   * The *name* field is set to *scan01* which you entered on the form view.
 . Click the *Create* button to create this simple scansetting definition.
 +
@@ -70,12 +69,12 @@ You can view this on the *Compliance Suite* tab.
 +
 image::module-02-sec-comp/11-compliance_suite.png[title="Compliance Suite", link=self, window=blank, width=100%]
 +
-. This Compliance Suite runs the defined scans against the specified nodes, in our case the masters and the workers defined in *scan01*.
-. You can watch as the scan proceeds through the steps of *RUNNING, AGGREGATING, and DONE* by clicking on the *Compliance Scan* tab.
+. This Compliance Suite runs the defined scans against the specified nodes, in our case the worker nodes defined in *scan01*.
+. For more detailed information you can click on the *Compliance Scan* tab. There you can watch as the scan proceeds through the steps of *RUNNING, AGGREGATING, and DONE*.
 +
 image::module-02-sec-comp/12-compliance_scan.png[title="Compliance Scan", link=self, window=blank, width=100%]
 +
-. Once the scan completes (3-4 minutes on average) you can check your results by clicking on the *ComplianceCheckResult* tab.
+. Once the scan completes (7-10 minutes on average) you can check your results by clicking on the *ComplianceCheckResult* tab.
 +
 . Change the search bar to *Label* and apply the following labels:
   * `compliance.openshift.io/check-status=FAIL`
@@ -101,13 +100,104 @@ image::module-02-sec-comp/13-compliance_check_results.png[title="Compliance Chec
 | rhcos4-moderate-worker-no-empty-passwords| high| FAIL
 |===
 
+NOTE: This is a table to better organize the view of each failure detected on the scan, you can search for each of these failures manually.
+
 [[node_remediate]]
 == Node Remediation with the OpenShift Compliance Operator
 <WRITE THIS SECTION>
 
 [[cluster_rbac]]
 == Configuring Role-based Access Control for Cluster Roles
-<WRITE THIS SECTION>
 
+One of the primary features that OpenShift is known for is it's rich set of Role-Based Access Controls for separate user accounts and cluster roles that define what each user is able to do when logged into the cluster. In this section of the module we are going to create a read-only account for our auditor and explore the limitations by which they are bound.
+
+. Start by clicking on *User Management* and *Users* in the left side menu.
+. You will see the current *admin* user that you are logged in as listed, and you will see that the identity is provided by the htpasswd_provider:admin authenticator.
++
+image::module-02-sec-comp/20-user_list.png[title="User List", link=self, window=blank, width=100%]
++
+NOTE: If no other authenication source has been set up prior and you are logged in as the default kubeadmin account, you will see a wizard here to assist with setting up your first authentication source.
+
+=== Create a Group
+
+. Now click on *Groups* on in the left menu, and click the button for *Create Group*
++
+image::module-02-sec-comp/21-create_group.png[title="Create Group", link=self, window=blank, width=100%]
++
+. In the Create Group YAML dialog, set the name of the group to *auditor_readonly* and add the users *auditor1* and *auditor2*. Click the *Create* button.
++
+image::module-02-sec-comp/22-create_group_settings.png[title="Create Group Settings", link=self, window=blank, width=100%]
++
+. You will be presented with the *Group details* screen where you can see the two user accounts listed, and we can define permissions by assigning the group a role binding. Click on the *RoleBindings* menu.
++
+image::module-02-sec-comp/23-group_details.png[title="Group Details", link=self, window=blank, width=100%]
++
+. After clicking on RoleBindings, click the *Create binding* button.
++
+image::module-02-sec-comp/24-create_binding.png[title="Create Binding", link=self, window=blank, width=100%]
++
+. This will bring you to the *Create RoleBinding* page, on this page select the following to create a read-only role binding for the auditor, and click the *Create* button:
+  * *Binding type:* Cluster-wide role binding
+  * *Name:* cluster_readonly 
+  * *Role name:* view
++
+image::module-02-sec-comp/25-role_binding_details.png[title="RoleBinding Details", link=self, window=blank, width=100%]
++
+
+=== Create the User Accounts
+
+. With the role binding created, we now need to add our two auditor accounts to our group.
+. In the left side menu, click *Administration* and *CustomResourceDefinitions* and use the search bar to look for the *OAuth* entry. When you find it, click it.
++
+image::module-02-sec-comp/26-crd_oauth.png[title="CRDs OAuth", link=self, window=blank, width=100%]
++
+. This will load the details page for the OAuth custom resource definition. On this page, click on *Instances*, and then click on *cluster*.
++
+image::module-02-sec-comp/27-oauth_instances.png[title="OAuth Instances", link=self, window=blank, width=100%]
++
+. On the cluster configuration page you will see where the htpasswd_provider is already currently configured, but there will also be a dropdown menu that has the word *Add* and you can select another provider from that list. Click and select *HTPasswd* as the option.
++
+image::module-02-sec-comp/28-add_htpass.png[title="Add Authentication", link=self, window=blank, width=100%]
++
+NOTE: Notice that in addition to HTPasswd, there are many options that allow you to integrate external authorization and authentication solutions with Red Hat OpenShift, which is perfect for larger enterprises.
++
+. You will be presented with a page that allows you to add in an HTPasswd file or supply usernames and hashed credentials for that purpose. Set the name of the identiry provider to *auditor_login* and paste the following syntax into the text box before clicking the *Add* button.
++
+[source,sh,role=execute]
+----
+auditor1:$apr1$VtSYSShP$CikLVoVy5sobCaHCvuxCv.
+auditor2:$apr1$4Vpe3O5u$OhjtFGDNHnl2RWiNnhlhZ0
+----
++
+image::module-02-sec-comp/29-add_identity_provider.png[title="Add Identity Provider", link=self, window=blank, width=100%]
++
+. Once added you will be returned to the Cluster OAuth details page and you will now see two identity providers listed, along with a blue notice that OAuth is being reconfigured. Click on the link provided for *View authentication conditions for reconfiguration status*.
++
+image::module-02-sec-comp/30-oauth_reconfig.png[title="OAuth Reconfiguration", link=self, window=blank, width=100%]
++
+. You will be brought to a page that shows the progress as the authentication cluster operator is reconfigured, once all the pods are restarted, the status will change to *Available* and the message will say *All is well*.
++
+image::module-02-sec-comp/31-oauth_reconfig_2.png[title="OAuth Reconfiguration Progressing", link=self, window=blank, width=100%]
++
+image::module-02-sec-comp/32-oauth_reconfig_3.png[title="OAuth Reconfiguration Complete", link=self, window=blank, width=100%]
+
+=== Testing our Configuration
+
+. With the OAuth configuration complete, we can now test our auditor login, and the limits of their account.
+. Log out of Red Hat OpenShift by clicking on *admin* at the top, and selecting *Log out* from the drop down menu.
++
+image::module-02-sec-comp/33-logout_openshift.png[title="Log Out OpenShift", link=self, window=blank, width=100%]
++
+. There is now an option to login with the *auditor_login* identity provider on the main OpenShift page.
++
+image::module-02-sec-comp/34-login_openshift.png[title="Log In OpenShift", link=self, window=blank, width=100%]
++
+. Click on *auditor_login* and when presented use the following username and password combination:
+  * *Username:* auditor1
+  * *Password:* auditor1pass!
++
+image::module-02-sec-comp/35-auditor1_login.png[title="Auditor 1 Login", link=self, window=blank, width=100%]
++
+ 
 
 == Summary

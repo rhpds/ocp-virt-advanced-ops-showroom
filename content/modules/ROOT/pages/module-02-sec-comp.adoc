@@ -139,8 +139,27 @@ image::module-02-sec-comp/19-node_5_updating.png[title="Node 5 Updating", link=s
 NOTE: This process can take quite a bit of time to complete depending on how busy the cluster currently is, and how many nodes there are to remediate. You can safely move along to the next section while it proceeds in the background.
 +
 . After several minutes the *MachineConfig* will be applied to each of the worker nodes in our cluster, and we can recheck our Compliance Scan results.
+. Return to the *Compliance Operator* configuration by clicking on *Operators* and *Installed Operators* in the left side menu.
 +
-image::module-02-sec-comp/20-compscan_results.png[title="Compliance Scan Results", link=self, window=blank, width=100%]
+image::module-02-sec-comp/02-compliance_operator.png[title="OpenShift Compliance Operator", link=self, window=blank, width=100%]
++
+. Click on the Compliance Scan tab, where you will see the scan we completed earlier. Click the three-dot menu, and select the option to delete the current scan.
++
+image::module-02-sec-comp/20-delete_compliance_scan.png[title="Delete Compliance Scan", link=self, window=blank, width=100%]
++
+. You will be prompted to be sure that you want to delete the current compliance scan. Click the *Delete* button.
++
+image::module-02-sec-comp/21-delete_scan_prompt.png[title="Delete Scan Prompt", link=self, window=blank, width=100%]
++
+. The *Compliance Suite* object defined earlier will automatically kick off a new scan which you will see appear on your screen.
++
+image::module-02-sec-comp/22-new_compliance_scan.png[title="New Compliance Scan", link=self, window=blank, width=100%]
++
+. As before this can will take a few minutes to complete, but once it is complete the results can be viewed by clicking on the *ComplianceCheckResult* tab, and searching for the *rhcos4-moderate-worker-coreos-pti-kernel-argument* and noticing that it's label is now *check-status=PASS* instead of *FAIL*
++
+image::module-02-sec-comp/23-check_status_pass.png[title="Check Status Pass", link=self, window=blank, width=100%]
+
+With the completion of these sections we have created a compliance scan and successfully remediated an identified vulnerability using the OpenShift Compliance Operator.
 
 [[cluster_rbac]]
 == Configuring Role-based Access Control for Cluster Roles
@@ -150,7 +169,7 @@ One of the notable features that OpenShift is known for compared to vanilla Kube
 . Start by clicking on *User Management* and *Users* in the left side menu.
 . You will see the current *admin* user that you are logged in as listed, and you will see that the identity is provided by the htpasswd_provider:admin authenticator.
 +
-image::module-02-sec-comp/20-user_list.png[title="User List", link=self, window=blank, width=100%]
+image::module-02-sec-comp/24-user_list.png[title="User List", link=self, window=blank, width=100%]
 +
 NOTE: If no other authenication source has been set up prior and you are logged in as the default kubeadmin account, you will see a wizard here to assist with setting up your first authentication source.
 
@@ -158,26 +177,26 @@ NOTE: If no other authenication source has been set up prior and you are logged 
 
 . Now click on *Groups* on in the left menu, and click the button for *Create Group*
 +
-image::module-02-sec-comp/21-create_group.png[title="Create Group", link=self, window=blank, width=100%]
+image::module-02-sec-comp/25-create_group.png[title="Create Group", link=self, window=blank, width=100%]
 +
 . In the Create Group YAML dialog, set the name of the group to *auditor_readonly* and add the users *auditor1* and *auditor2*. Click the *Create* button.
 +
-image::module-02-sec-comp/22-create_group_settings.png[title="Create Group Settings", link=self, window=blank, width=100%]
+image::module-02-sec-comp/26-create_group_settings.png[title="Create Group Settings", link=self, window=blank, width=100%]
 +
 . You will be presented with the *Group details* screen where you can see the two user accounts listed, and we can define permissions by assigning the group a role binding. Click on the *RoleBindings* menu.
 +
-image::module-02-sec-comp/23-group_details.png[title="Group Details", link=self, window=blank, width=100%]
+image::module-02-sec-comp/27-group_details.png[title="Group Details", link=self, window=blank, width=100%]
 +
 . After clicking on RoleBindings, click the *Create binding* button.
 +
-image::module-02-sec-comp/24-create_binding.png[title="Create Binding", link=self, window=blank, width=100%]
+image::module-02-sec-comp/28-create_binding.png[title="Create Binding", link=self, window=blank, width=100%]
 +
 . This will bring you to the *Create RoleBinding* page, on this page select the following to create a read-only role binding for the auditor, and click the *Create* button:
   * *Binding type:* Cluster-wide role binding
   * *Name:* cluster_readonly 
   * *Role name:* view
 +
-image::module-02-sec-comp/25-role_binding_details.png[title="RoleBinding Details", link=self, window=blank, width=100%]
+image::module-02-sec-comp/29-role_binding_details.png[title="RoleBinding Details", link=self, window=blank, width=100%]
 +
 
 === Create the User Accounts
@@ -185,15 +204,15 @@ image::module-02-sec-comp/25-role_binding_details.png[title="RoleBinding Details
 . With the role binding created, we now need to add our two auditor accounts to our group.
 . In the left side menu, click *Administration* and *CustomResourceDefinitions* and use the search bar to look for the *OAuth* entry. When you find it, click it.
 +
-image::module-02-sec-comp/26-crd_oauth.png[title="CRDs OAuth", link=self, window=blank, width=100%]
+image::module-02-sec-comp/30-crd_oauth.png[title="CRDs OAuth", link=self, window=blank, width=100%]
 +
 . This will load the details page for the OAuth custom resource definition. On this page, click on *Instances*, and then click on *cluster*.
 +
-image::module-02-sec-comp/27-oauth_instances.png[title="OAuth Instances", link=self, window=blank, width=100%]
+image::module-02-sec-comp/31-oauth_instances.png[title="OAuth Instances", link=self, window=blank, width=100%]
 +
 . On the cluster configuration page you will see where the htpasswd_provider is already currently configured, but there will also be a dropdown menu that has the word *Add* and you can select another provider from that list. Click and select *HTPasswd* as the option.
 +
-image::module-02-sec-comp/28-add_htpass.png[title="Add Authentication", link=self, window=blank, width=100%]
+image::module-02-sec-comp/32-add_htpass.png[title="Add Authentication", link=self, window=blank, width=100%]
 +
 NOTE: Notice that in addition to HTPasswd, there are many options that allow you to integrate external authorization and authentication solutions with Red Hat OpenShift, which is perfect for larger enterprises.
 +
@@ -209,43 +228,43 @@ image::module-02-sec-comp/29-add_identity_provider.png[title="Add Identity Provi
 +
 . Once added you will be returned to the Cluster OAuth details page and you will now see two identity providers listed, along with a blue notice that OAuth is being reconfigured. Click on the link provided for *View authentication conditions for reconfiguration status*.
 +
-image::module-02-sec-comp/30-oauth_reconfig.png[title="OAuth Reconfiguration", link=self, window=blank, width=100%]
+image::module-02-sec-comp/33-oauth_reconfig.png[title="OAuth Reconfiguration", link=self, window=blank, width=100%]
 +
 . You will be brought to a page that shows the progress as the authentication cluster operator is reconfigured, once all the pods are restarted, the status will change to *Available* and the message will say *All is well*.
 +
-image::module-02-sec-comp/31-oauth_reconfig_2.png[title="OAuth Reconfiguration Progressing", link=self, window=blank, width=100%]
+image::module-02-sec-comp/34-oauth_reconfig_2.png[title="OAuth Reconfiguration Progressing", link=self, window=blank, width=100%]
 +
-image::module-02-sec-comp/32-oauth_reconfig_3.png[title="OAuth Reconfiguration Complete", link=self, window=blank, width=100%]
+image::module-02-sec-comp/35-oauth_reconfig_3.png[title="OAuth Reconfiguration Complete", link=self, window=blank, width=100%]
 
 === Testing our Configuration
 
 . With the OAuth configuration complete, we can now test our auditor login, and the limits of their account.
 . Log out of Red Hat OpenShift by clicking on *admin* at the top, and selecting *Log out* from the drop down menu.
 +
-image::module-02-sec-comp/33-logout_openshift.png[title="Log Out OpenShift", link=self, window=blank, width=100%]
+image::module-02-sec-comp/36-logout_openshift.png[title="Log Out OpenShift", link=self, window=blank, width=100%]
 +
 . There is now an option to login with the *auditor_login* identity provider on the main OpenShift page.
 +
-image::module-02-sec-comp/34-login_openshift.png[title="Log In OpenShift", link=self, window=blank, width=100%]
+image::module-02-sec-comp/37-login_openshift.png[title="Log In OpenShift", link=self, window=blank, width=100%]
 +
 . Click on *auditor_login* and when presented use the following username and password combination:
   * *Username:* auditor1
   * *Password:* auditor1pass!
 +
-image::module-02-sec-comp/35-auditor1_login.png[title="Auditor 1 Login", link=self, window=blank, width=100%]
+image::module-02-sec-comp/38-auditor1_login.png[title="Auditor 1 Login", link=self, window=blank, width=100%]
 +
 . When the auditor logs in with the read-only persmissions they will only be able to see a limited view of the OpenShift console from the Admin perspective.
 +
-image::module-02-sec-comp/36-auditor1_admin_view.png[title="Auditor 1 Admin View", link=self, window=blank, width=100%]+
+image::module-02-sec-comp/39-auditor1_admin_view.png[title="Auditor 1 Admin View", link=self, window=blank, width=100%]+
 . If the auditor needs to validate our virtual machine environment, they can still access that by clicking on *Virtualization* and *VirtualMachines* in the left side menu.
 . They can see all virtual machines in each project, and their current status.
 . The auditor can even click on a specific machine and get additional details. In this case, they want to test the *database* server in the *webapp-vms* namespace.
 +
-image::module-02-sec-comp/37-auditor1_vm_view.png[title="Auditor 1 VM View", link=self, window=blank, width=100%]
+image::module-02-sec-comp/40-auditor1_vm_view.png[title="Auditor 1 VM View", link=self, window=blank, width=100%]
 +
 . Once they are on the VirtualMachine details page they can see the information about the virtual guest, including it's CPU and memory utilization, but they are prevented from launching the VNC console, or manipulating the machine state in any way as the buttons are greyed out.
 +
-image::module-02-sec-comp/38-auditor1_database_readonly.png[title="Auditor 1 Database ReadOnly", link=self, window=blank, width=100%]
+image::module-02-sec-comp/41-auditor1_database_readonly.png[title="Auditor 1 Database ReadOnly", link=self, window=blank, width=100%]
 +
 . At your leisure you may explore the UI and confirm that the Auditor1 account is read only. When you are finished proceed to the next module.
 

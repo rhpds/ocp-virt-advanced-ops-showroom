@@ -9,6 +9,8 @@ The Mega-Sale was a success, but now, a critical security audit is looming. We n
 
 This section of our lab will focus on making use of the OpenShift Compliance Operator to configure security scans in your OpenShift cluster. The compliance operator can help ensure that the hosts in your OpenShift environment meet specific security standards, and are deployed to meet those standards.
 
+NOTE: In our lab environment we will only be scanning and remediating our worker nodes, as it is a virtual hosted environment and doing so with the control plane can cause the cluster to become unstable.
+
 image::module-02-sec-comp/01-compliance_overview.png[title="Compliance Overview", link=self, window=blank, width=100%]
 
 . Select *Operators* and then *Installed Operators* from the left side navigation menu, confirm that you have selected *All Projects* and select the *Compliance Operator*.
@@ -74,7 +76,7 @@ image::module-02-sec-comp/11-compliance_suite.png[title="Compliance Suite", link
 +
 image::module-02-sec-comp/12-compliance_scan.png[title="Compliance Scan", link=self, window=blank, width=100%]
 +
-. Once the scan completes (7-10 minutes on average) you can check your results by clicking on the *ComplianceCheckResult* tab.
+. Once the scan completes (3-5 minutes on average) you can check your results by clicking on the *ComplianceCheckResult* tab. It will list all of the scans that were a part of the compliance suite we chose and their results.
 +
 . Change the search bar to *Label* and apply the following labels:
   * `compliance.openshift.io/check-status=FAIL`
@@ -82,16 +84,10 @@ image::module-02-sec-comp/12-compliance_scan.png[title="Compliance Scan", link=s
 +
 image::module-02-sec-comp/13-compliance_check_results.png[title="Compliance Check Results", link=self, window=blank, width=100%]
 +
-. Twelve high severity checks have a failed status:
-
+. Six high severity checks have a failed status:
++
 |===
 | *ComplianceCheckResult* | *Check-Severity* | *Check-Status*
-| rhcos4-moderate-master-configure-crypto-policy| high| FAIL
-| rhcos4-moderate-master-coreos-pti-kernel-argument| high| FAIL
-| rhcos4-moderate-master-disable-ctrlaltdel-burstaction| high| FAIL
-| rhcos4-moderate-master-disable-ctrlaltdel-reboot| high| FAIL
-| rhcos4-moderate-master-enable-fips-mode| high| FAIL
-| rhcos4-moderate-master-no-empty-passwords| high| FAIL
 | rhcos4-moderate-worker-configure-crypto-policy| high| FAIL
 | rhcos4-moderate-worker-coreos-pti-kernel-argument| high| FAIL
 | rhcos4-moderate-worker-disable-ctrlaltdel-burstaction| high| FAIL
@@ -99,17 +95,57 @@ image::module-02-sec-comp/13-compliance_check_results.png[title="Compliance Chec
 | rhcos4-moderate-worker-enable-fips-mode| high| FAIL
 | rhcos4-moderate-worker-no-empty-passwords| high| FAIL
 |===
-
++
 NOTE: This is a table to better organize the view of each failure detected on the scan, you can search for each of these failures manually.
 
 [[node_remediate]]
 == Node Remediation with the OpenShift Compliance Operator
-<WRITE THIS SECTION>
+When it comes to remediation, it can be performed in one of two ways. Automatically, which may seem simple and the easiest way to do it, but can lead to unexpected results. Or manually, which can be tedious, but allows you to canary test each application, and later automate through a tool like gitops that checks for failures before proceeding.
+
+NOTE: One example of this is the *rhcos4-moderate-worker-enable-fips-mode* which was listed as a high severity, fail status on our previous scan, cannot be applied unless at install time if FIPS mode is enabled. Attempting to auto-remediate this can lead to issues with your cluster.
+
+In this section we are going to choose one of our failures from the previous scan, and remediate it manually.
+
+. Starting from the list above we are going to choose to remediate the following scan result: *rhcos4-moderate-worker-coreos-pti-kernel-arguments* as required by our audit.
++
+Note: The *rhcos4-moderate-worker-coreos-pti-kernel-argument* is required to isolate kernel and userspace page tables to prevent attacks like the https://bugzilla.redhat.com/show_bug.cgi?id=1519781[Meltdown^] vulnerability.
++
+Click on the *Compliance Remediation* tab, and in the *Name* search bar type the term _pti-kernel_ to find the suggested remediation for *rhcos4-moderate-worker-coreos-pti-kernel-argument*. When the result appears, click the three-dot menu on the right, and select *Edit ComplianceRemediation* from the menu that appears.
++
+image::module-02-sec-comp/14-compliance_remediation.png[title="Compliance Remediation", link=self, window=blank, width=100%]
++
+. This will launch the ComplianceRemediation details page with a YAML block describing the current status. 
+. Under the *spec* section you will see that the current *apply* state is *false*, and the *kernelArugument* that will be applied is that *pti=on*. Under the *status* section we see that the remediation state is *NotApplied.*
++
+image::module-02-sec-comp/15-compred_details.png[title="Compliance Remediation Details", link=self, window=blank, width=100%]
++
+. Under the *spec* section change the *apply* field to *true* and click the *Save* button.
++
+image::module-02-sec-comp/16-compred_true.png[title="Compliance Remediation True", link=self, window=blank, width=100%]
++
+. You will be prompted with a message that lets you know that this is a managed resource, click the *Save* button to sart the remediation process.
++
+image::module-02-sec-comp/17-managed_resource.png[title="Managed Resource Prompt", link=self, window=blank, width=100%]
++
+. Once applied, a *MachineConfig* will be generated to provide the remediation, and each node in the cluster will be cordoned, drained, and remediated in sequence.
+. On the left side menu, click on *Compute* and *Nodes* to observe the process.
++
+image::module-02-sec-comp/18-nodes_cordoned.png[title="Node 5 Cordoned", link=self, window=blank, width=100%]
++
+. Click on node 5 for it's Node details page, and notice that the event log shows the node was cordoned to apply the update, and you can also see CPU and Memory utilization drop off as the node was successfully drained.
++
+image::module-02-sec-comp/19-node_5_updating.png[title="Node 5 Updating", link=self, window=blank, width=100%]
++
+NOTE: This process can take quite a bit of time to complete depending on how busy the cluster currently is, and how many nodes there are to remediate. You can safely move along to the next section while it proceeds in the background.
++
+. After several minutes the *MachineConfig* will be applied to each of the worker nodes in our cluster, and we can recheck our Compliance Scan results.
++
+image::module-02-sec-comp/20-compscan_results.png[title="Compliance Scan Results", link=self, window=blank, width=100%]
 
 [[cluster_rbac]]
 == Configuring Role-based Access Control for Cluster Roles
 
-One of the primary features that OpenShift is known for is it's rich set of Role-Based Access Controls for separate user accounts and cluster roles that define what each user is able to do when logged into the cluster. In this section of the module we are going to create a read-only account for our auditor and explore the limitations by which they are bound.
+One of the notable features that OpenShift is known for compared to vanilla Kubernetes is it's rich set of Role-Based Access Controls for separate user accounts and cluster roles that define what each user is able to do when logged into the cluster. In this section of the module we are going to create a read-only account for our auditor and explore the limitations by which they are bound.
 
 . Start by clicking on *User Management* and *Users* in the left side menu.
 . You will see the current *admin* user that you are logged in as listed, and you will see that the identity is provided by the htpasswd_provider:admin authenticator.
@@ -198,6 +234,24 @@ image::module-02-sec-comp/34-login_openshift.png[title="Log In OpenShift", link=
 +
 image::module-02-sec-comp/35-auditor1_login.png[title="Auditor 1 Login", link=self, window=blank, width=100%]
 +
- 
+. When the auditor logs in with the read-only persmissions they will only be able to see a limited view of the OpenShift console from the Admin perspective.
++
+image::module-02-sec-comp/36-auditor1_admin_view.png[title="Auditor 1 Admin View", link=self, window=blank, width=100%]+
+. If the auditor needs to validate our virtual machine environment, they can still access that by clicking on *Virtualization* and *VirtualMachines* in the left side menu.
+. They can see all virtual machines in each project, and their current status.
+. The auditor can even click on a specific machine and get additional details. In this case, they want to test the *database* server in the *webapp-vms* namespace.
++
+image::module-02-sec-comp/37-auditor1_vm_view.png[title="Auditor 1 VM View", link=self, window=blank, width=100%]
++
+. Once they are on the VirtualMachine details page they can see the information about the virtual guest, including it's CPU and memory utilization, but they are prevented from launching the VNC console, or manipulating the machine state in any way as the buttons are greyed out.
++
+image::module-02-sec-comp/38-auditor1_database_readonly.png[title="Auditor 1 Database ReadOnly", link=self, window=blank, width=100%]
++
+. At your leisure you may explore the UI and confirm that the Auditor1 account is read only. When you are finished proceed to the next module.
+
+In this section of our lab we created a limited read-only account with view permissions for the auditors that will be examining our infrastructure. As mentioned before RBAC in Red Hat OpenShift is extremely versatile, and you can explore other customized roles and rolebindings by viewing the documentation https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/authentication_and_authorization/using-rbac[here^].
+
 
 == Summary
+
+In this module we were preparing for our company's annual security audit. By using the OpenShift Compliance Operator to scan and apply settings to our environment to ensure they meet our security standards, and by showing how RBAC can be configured to allow limited access to specific individuals, we can demonstrate how our OpenShift Virtualization infrastructure can be tightened and secured.

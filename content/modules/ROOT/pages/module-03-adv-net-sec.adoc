@@ -4,11 +4,6 @@
 
 With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will learn more about visualizing network traffic flows the the Network Observability Operator, and how to shape and secure our network by implementing Network Policies.
 
-[[net_observe]]
-== Examining Network Traffic with the Network Observability Operator
-
-<WRITE THIS SECTION>
-
 [[net_policy]]
 == Configure Network Policies to Manage VM Traffic
 
@@ -26,11 +21,11 @@ In some secure environments network traffic is not allowed to leave the cluster 
 
 . On the left side navigation menu, click on *Virtualization* then click *VirtualMachines*, and select the *rhel9-vm1* virtual machine under the *vms-aap-day2* project in the center column.
 +
-image::module-03-adv-net-sec/28-view_vm.png[title="View VM", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/01-view_vm.png[title="View VM", link=self, window=blank, width=100%]
 +
 . Click on the *Console* tab and use the provided credentials, and the built in copy/paste functionality to authenticate to the VM.
 +
-image::module-03-adv-net-sec/29-login_vm.png[title="Login to VM", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/02-login_vm.png[title="Login to VM", link=self, window=blank, width=100%]
 +
 NOTE: You may see a popup that asks you to enable the copy/paste functionality. If prompted click *Allow*.
 +
@@ -41,23 +36,23 @@ NOTE: You may see a popup that asks you to enable the copy/paste functionality. 
 ping www.google.com
 ----
 +
-image::module-03-adv-net-sec/30-ping_site.png[title="Ping Google", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/03-ping_site.png[title="Ping Google", link=self, window=blank, width=100%]
 +
 . Press *Control+C* to stop the ping.
 +
 . From the left side navigation menu, click on *Workloads* and then *Pods*, and then click on the virt-launcher pod for the one that represents the VM *rhel9-vm1* to view the pod details.
 +
-image::module-03-adv-net-sec/31-select_pod.png[title="Select Pod", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/04-select_pod.png[title="Select Pod", link=self, window=blank, width=100%]
 +
 NOTE: Pod names are randomly generated, so yours will most likely not match the screenshot above.
 +
 . On the *Pod details* page, click the *Edit* option on the *Labels* section.
 +
-image::module-03-adv-net-sec/32-pod_details.png[title="Edit Pod Details", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/05-pod_details.png[title="Edit Pod Details", link=self, window=blank, width=100%]
 +
 . An *Edit labels* window will appear, you can click into the center box and add a label for `app=network-policy-deny`, press the *Enter* key to commit it, and then click the *Save* button.
 +
-image::module-03-adv-net-sec/33-pod_labels.png[title="Edit Pod Labels", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/06-pod_labels.png[title="Edit Pod Labels", link=self, window=blank, width=100%]
 +
 . Repeat the same process for the *rhel9-vm2* virtual machine.
 
@@ -65,7 +60,7 @@ image::module-03-adv-net-sec/33-pod_labels.png[title="Edit Pod Labels", link=sel
 
 . From the left side navigation menu, click on *Networking* and then click on *NetworkPolicies*, then click on the *Create NetworkPolicy* button in the center of the screen.
 +
-image::module-03-adv-net-sec/34-network_policy.png[title="Network Policy", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/07-network_policy.png[title="Network Policy", link=self, window=blank, width=100%]
 +
 . In *NetworkPolicies* fill out the following fields:
   * *Policy name*: `ping-egress-deny`
@@ -73,12 +68,12 @@ image::module-03-adv-net-sec/34-network_policy.png[title="Network Policy", link=
   * *Value*: `network-policy-deny`
   * *Deny all egress traffic checkbox*: checked
 +
-image::module-03-adv-net-sec/35-network_policy_configure.png[title="Configure Network Policy", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/08-network_policy_configure.png[title="Configure Network Policy", link=self, window=blank, width=100%]
 +
 . With the values filled out, you can click the *affected pods* link under the *Pod selector* section to show which pods are affected by this policy.
 Once you are satisfied with your settings you can click the *Create* button.
 +
-image::module-03-adv-net-sec/36-affected_pods.png[title="Affected Pods", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/09-affected_pods.png[title="Affected Pods", link=self, window=blank, width=100%]
 +
 . With the policy created, go test it out.
 
@@ -94,18 +89,94 @@ image::module-03-adv-net-sec/36-affected_pods.png[title="Affected Pods", link=se
 ping www.google.com
 ----
 +
-image::module-03-adv-net-sec/37-ping_site_deny.png[title="Egress Blocked", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/10-ping_site_deny.png[title="Egress Blocked", link=self, window=blank, width=100%]
 +
 . Egress from the cluster is completely blocked, including DNS lookups.
 . Once you have completed this exercise, return to *Networking* and *NetworkPolicies* and delete the *ping-egress-deny* policy using the three-dot menu on the right, and confirming in the popup box.
 +
-image::module-03-adv-net-sec/38-delete_policy.png[title="Delete Policy", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/11-delete_policy.png[title="Delete Policy", link=self, window=blank, width=100%]
 
 [[net_pol_projects]]
 == Configure Network Policies to Manage VM Traffic Between Projects
+
+While it may seem like a basic security configuration to ensure that virtual machines are unable to reach unwanted external website, network policy also provides us with a diverse set of tools that also allow us to shape traffic between our VMs and the projects in which they reside.
+
+NOTE: For this section we are going to make use of UDN (User Defined Networks) and configure our three namespaces for dev, test, and production so that they have limited network traffic between the resources defined in each one. Currently for a namespace to make use of UDN functionality it must have a specialized label applied at creation that allows it to override the default cluster networking configuration.
+
+=== Create UDN Enabled Namespaces
+
+. From your OpenShift console, click on *Administration*, followed by *Namespaces* and the *Create Namespace* button in the corner.
++
+image::module-03-adv-net-sec/12-create_namespace.png[title="Create Namespace", link=self, window=blank, width=100%]
++
+. The *Create Namespace* prompt will open, and give you the option to enter a name, and add any custom labels to the namespace. Type in the name *dev* and add the following label: **k8s.ovn.org/primary-user-defined-network**, and click the *Create* button.
++
+image::module-03-adv-net-sec/13-namespace_dialog.png[title="Create Namespace Dialog", link=self, window=blank, width=100%]
++
+. When the namespace is created, you will be taken to the *Namespace details* page where you should see the label you applied listed.
++
+image::module-03-adv-net-sec/14-namespace_details.png[title="Namespace Details", link=self, window=blank, width=100%]
++
+. Repeat these steps to create namespaces for the *test* and *prod* namespaces as well.
+
+=== Create UDNs For Each Namespace
+
+. Click on *Networking* followed by *UserDefinedNetworks*. Confirm that you are in your *dev* project and click the *Create* button in the center of the screen and select *UserDefinedNetwork* from the dropdown menu.
++
+image::module-03-adv-net-sec/15-create_udn.png[title="Create UDN", link=self, window=blank, width=100%]
++
+. In the dialog box that appears your project name will already be defined, you just need to enter the subnet you want to use. Type **192.168.253.0/24** into the box for the *dev* project, and click the *Create* button.
++
+image::module-03-adv-net-sec/16-create_udn_dialog.png[title="Create UDN Dialog", link=self, window=blank, width=100%]
++
+. You will be taken to the *UserDefinedNetwork details* page which shows information about the UDN you just created including details such as it's namespace, topology, subnet, and shows you that it has automatically created a Network Attachment Definition for you to connect your virtual machines.
++
+. Repeat these steps to create a UDN in the *test* namespace with subnet **192.168.254.0/24** and in the *prod* namespace with the subnet **192.168.255.0/24**
+. Once all three are created you should be able to click the *Project* dropdown at the top of the page and select *All Projects* to see them all listed.
++
+image::module-03-adv-net-sec/17-udn_list.png[title="UDN List", link=self, window=blank, width=100%]
+
+=== Create VMs and Attach Them to the UDNs
+
+Now that we have defined our namespaces and created our UDNs, we need to put them in practice by creating a few virtual machines to test out connectivity.
+
+. Click on *Virtualization* and *Catalog*. Ensure that you are in the *dev* project, and select the tile for the *Fedora VM* template.
++
+image::module-03-adv-net-sec/18-vm_catalog.png[title="VM Catalog", link=self, window=blank, width=100%]
++
+. After clicking you will be presented with the *Fedora VM* dialog. Notice that the VM template is connected to the OpenShift pod network by default, so we will need to customize the VM. Name your first VM *fedora-dev01*, and click on the *Customize VirtualMachine* button.
++
+image::module-03-adv-net-sec/19-create_vm_dialog.png[title="Create VM Dialog", link=self, window=blank, width=100%]
++
+. You will land on the *Customize and create Virtual Machine* page which allows you to customize the VM. Click on the *Network interfaces* tab, and then the *three-dot* menu to the right side of the default network adapter, and choose the option to *Edit*.
++
+image::module-03-adv-net-sec/20-edit_network.png[title="Edit Network", link=self, window=blank, width=100%]
++
+. A new dialog will appear called *Edit network interface*. On this, select the *dev/primary-udn* network from the drop-down list, and click on the *Save* button.
++
+image::module-03-adv-net-sec/21-edit_network_interface.png[title="Edit Network", link=self, window=blank, width=100%]
++
+. With the network adapter attached to our namespace-scoped UDN, we can now click the *Create VirtualMachine* button to provision our new VM.
++
+image::module-03-adv-net-sec/22-create_virtualmachine.png[title="Create VirtualMachine", link=self, window=blank, width=100%]
++
+. You will be returned to the tree-view on the *VirtualMachines* menu, and now see both the dev namespace, and the fedora-dev01 virtual machine listed as the machine provisions and starts up.
++
+image::module-03-adv-net-sec/23-vm_details.png[title="VM Details", link=self, window=blank, width=100%]
++
+. With this VM started, please repeat the steps to create an additional VM *fedora-dev02* in the *dev* namespace, followed by *fedora-test01* in the *test* namespace, and *fedora-prod01* in the *prod* namespace.
+. With the list of VM's created we can now test how traffic flows between the VMs both within and between projects.
+
+=== Testing VM Connectivity
+
+=== Configuring Advanced Connectivity
+
+
+
+[[net_observe]]
+== Examining Network Traffic with the Network Observability Operator
+
 <WRITE THIS SECTION>
-
-
 
 == Summary
 In this section we learned how to make use of the Network Observability Operator to scan our cluster and visualize traffic patterns in and out. We then learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to shape traffic between virtual guests and projects on the same cluster. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.

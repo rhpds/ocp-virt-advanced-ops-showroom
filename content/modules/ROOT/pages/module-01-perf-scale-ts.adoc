@@ -245,7 +245,7 @@ image::module-01-perf-scale-ts/37-project_mass.png[title="Mass VMs Project", lin
 +
 image::module-01-perf-scale-ts/38-select_all_start.png[title="Start All VMs", link=self, window=blank, width=100%]
 +
-. Once all of the VMs attempt to power on, there should be approximently 6-7 VMs that are currently in an error state.
+. Once all of the VMs attempt to power on, there should be approximently 5-6 VMs that are currently in an error state.
 +
 image::module-01-perf-scale-ts/39-after_start.png[title="VMs After Startup", link=self, window=blank, width=100%]
 +
@@ -310,6 +310,25 @@ In this section we are going to demonstrate OpenShift's load aware rebalancing f
 
 NOTE: Load-aware rebalancing has already been configured on this cluster, this is just an exercise that allows us to see the feature in action.
 
+=== Increase Node CPU Utilization
+
+For this section we are going to use the load generator application again, but we have a large number of them deployed in the mass-vms project, we are going to perform some CLI commands to scale the deployments to put pressure on our cluster, and to check the status of rebalancing efforts.
+
+. To get started, click the icon in the upper right corner to launch the OpenShift Web Terminal. The web terminal will launch at the bottom of your screen.
++
+image::module-01-perf-scale-ts/56-openshift_web_terminal.png[title="OpenShift Web Terminal", link=self, window=blank, width=100%]
++
+. Paste the following syntax into the terminal in order to increase the number of load generator instances to put additional pressure on the cluster.
++
+[source,sh,role=execute]
+----
+for i in {1..12}; do oc scale deployment/loadmaker-$i --replicas=5 -n mass-vms; done
+----
++
+. This should start putting additional pressure on each of our virtual machines in the mass-vms project and in turn the nodes hosting them. We should see the virtual guests begin to auto migrate to node 2 in order to balance out the cluster
++
+image::module-01-perf-scale-ts/57-scale_loadmaker.png[title="CLI Scale Deployment", link=self, window=blank, width=100%]
+
 === Add an Additional Node to the Cluster
 
 . The first step we want to perform is to repeat the step we did in the earlier section by removing the taint from worker node 2 in our cluster. Do so by clicking on *Compute* followed by *Nodes* and click on worker node 2.
@@ -327,27 +346,6 @@ image::module-01-perf-scale-ts/54-node_2_taint.png[title="Node 2 Taint", link=se
 . In the window that pops up, click the *minus* sign to remove the taint, and then click the *Save* button.
 +
 image::module-01-perf-scale-ts/55-node_2_taint_window.png[title="Remove Taint Window", link=self, window=blank, width=100%]
-+
-. With the taint removed, we now need to increase the utilization on the cluster in order to trigger automatic rebalancing of the workloads. 
-
-=== Increase Node CPU Utilization
-
-For this section we are going to use the load generator application again, but we have a large number of them deployed in the mass-vms project, we are going to perform some CLI commands to scale the deployments to put pressure on our cluster, and to check the status of rebalancing efforts.
-
-. To get started, click the icon in the upper right corner to launch the OpenShift Web Terminal. The web terminal will launch at the bottom of your screen.
-+
-image::module-01-perf-scale-ts/56-openshift_web_terminal.png[title="OpenShift Web Terminal", link=self, window=blank, width=100%]
-+
-. Paste the following syntax into the terminal in order to increase the number of load generator instances to put additional pressure on the cluster.
-+
-[source,sh,role=execute]
-----
-for i in {1..12}; do oc scale deployment/loadmaker-$i --replicas=6 -n mass-vms; done
-----
-+
-. This should start putting additional pressure on each of our virtual machines in the mass-vms project and in turn the nodes hosting them. We should see the virtual guests begin to auto migrate to node 2 in order to balance out the cluster
-+
-image::module-01-perf-scale-ts/57-scale_loadmaker.png[title="CLI Scale Deployment", link=self, window=blank, width=100%]
 +
 . Return to the virtual machine view by clicking on *Virtualization* and *VirtualMachines* in the left side menu, click on *All projects* and finally  click on the *Filter* drop down. 
 . You can watch this view update in realtime, in a minute or two node 2 should appear and it's guest count should begin to rise as VMs are live migrated to the node.

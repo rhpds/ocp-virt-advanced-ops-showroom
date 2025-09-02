@@ -317,7 +317,7 @@ Your admin login is available with the following credentials:
 +
 . Within the AAP UI dashboard, use the left side menu to navigate to *Automation Execution* then click on *Templates*. On the templates screen, click the *Create template* button, and chose *Create job template* from the dropdown menu.
 +
-image::module-04-virt-automation/56-create_job_template.png[title="Create Job Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/16-create_job_template.png[title="Create Job Template", link=self, window=blank, width=100%]
 +
 . Fill out the following details on the *Create job template* page:
 +
@@ -337,19 +337,19 @@ image::module-04-virt-automation/56-create_job_template.png[title="Create Job Te
 +
 . Once filled out, click the *Create job template* button.
 +
-image::module-04-virt-automation/16-stop_vms_template.png[title="Stop VMs Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/17-stop_vms_template.png[title="Stop VMs Template", link=self, window=blank, width=100%]
 +
 . Once the *Stop VMs* Job Template is created, select the *Launch template* button on the top right corner to run the job.
 +
-image::module-04-virt-automation/17-launch_stop_vms.png[title="Launch Stop VMs Template", link=self, window=blank, width=100%]
+image::module-04-virt-automation/18-launch_stop_vms.png[title="Launch Stop VMs Template", link=self, window=blank, width=100%]
 +
 . The job will start running, and once it is successful you will see changes displayed in yellow.
 +
-image::module-04-virt-automation/18-successful_job.png[title="Successful Job", link=self, window=blank, width=100%]
+image::module-04-virt-automation/19-successful_job.png[title="Successful Job", link=self, window=blank, width=100%]
 +
 . Return to the OpenShift console to see that the virtual machines in the *vms-aap-day2* project have all now stopped.
 +
-image::module-04-virt-automation/19-stopped_vms.png[title="Stopped VMs", link=self, window=blank, width=100%]
+image::module-04-virt-automation/20-stopped_vms.png[title="Stopped VMs", link=self, window=blank, width=100%]
 +
 . Return to the AAP Dashboard, and repeat this process to create the *Start VMs* and *Restart VMs* Ansible Job Templates. The details for each is provided below.
 

@@ -132,11 +132,11 @@ image::module-02-sec-comp/17-managed_resource.png[title="Managed Resource Prompt
 +
 image::module-02-sec-comp/18-nodes_cordoned.png[title="Node 5 Cordoned", link=self, window=blank, width=100%]
 +
-. Click on node 5 for it's Node details page, and notice that the event log shows the node was cordoned to apply the update, and you can also see CPU and Memory utilization drop off as the node was successfully drained.
+. You will see a node enter the _SchedulingDisabled_ state to begin it's remediation. Click on that node for it's Node details page, and notice that the event log shows the node was cordoned to apply the update, and you can also see CPU and Memory utilization drop off as the node was successfully drained.
 +
 image::module-02-sec-comp/19-node_5_updating.png[title="Node 5 Updating", link=self, window=blank, width=100%]
 +
-NOTE: This process can take quite a bit of time to complete depending on how busy the cluster currently is, and how many nodes there are to remediate as they each have to evict pods safely and reboot to apply the update.
+NOTE: This process can take quite a bit of time to complete depending on how busy the cluster currently is, and how many nodes there are to remediate as they each have to evict pods safely and reboot to apply the update. Also, you may be logged out of the cluster while the oauth pods are being evacuated.
 +
 . After several minutes the *MachineConfig* will be applied to each of the worker nodes in our cluster, and we can recheck our Compliance Scan results.
 . Return to the *Compliance Operator* configuration by clicking on *Operators* and *Installed Operators* in the left side menu.

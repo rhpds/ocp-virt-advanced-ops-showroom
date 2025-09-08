@@ -7,7 +7,63 @@ As Legacy Systems Inc. continues its expansion, we've found ourselves deploying 
 [[discover_cluster]]
 == Discover Your Cluster
 
-<WRITE THIS SECTION>
+NOTE: This section of the lab uses a shared ACM hub cluster whose console URL will be provided by your lab proctor. You will login to the workstation interface where you will be assigned a user account: user1 - user**n** and will login with that user to complete this lab.
+
+. Log in to the console of the shared Red Hat Advanced Cluster Managment (RHACM) hub with the assigned credentials for your lab user account.
++
+image::module-05-virt-acm/00-openshift_login.png[title="OpenShift Login", link=self, window=blank, width=100%]
++
+. When you first log in, you will see that there are no clusters present to manage. Click the button to *Import cluster*.
++
+image::module-05-virt-acm/01-import_cluster.png[title="Import Cluster", link=self, window=blank, width=100%]
++
+NOTE: It's possible that if other lab attendees have advanced past this step the page will not exactly reflect the screenshot above. You can still import your cluster and continue your lab.
++
+. The next screen you will be presented with is the *Details* page for the *Import an existing cluster* wizard. Fill in the fields on the page with the following values:
++
+* *Name:* userX-virt-cluster
+* *Cluster set:* teamX
+* *Import mode:* Enter your server URL and API token for the existing cluster
++
+image::module-05-virt-acm/02-import_cluster_details.png[title="Import Cluster Details", link=self, window=blank, width=100%] 
++
+. Once you have selected the *Import mode* you will be prompted to provide the *Server URL* and *API Token* to discover your cluster. You will need to get these values from your original cluster in order to discover it.
+. Return to the tab with your original lab cluster open, and click on the *admin* user at the top and select the option to *Copy login command* from the dropdown menu.
++
+image::module-05-virt-acm/03-copy_login_command.png[title="Copy Login Command", link=self, window=blank, width=100%]
++
+. A new tab will open and you will be prompted to login to your cluster through the htpass_provider authorization agent again. As a reminder, your cluster admin credentials are:
++
+* *User:* {openshift_cluster_admin_username}
+* *Password:* {openshift_cluster_admin_password}
++
+. When you login you will see a large white screen with a link named *Display Token*. Click it.
++
+image::module-05-virt-acm/04-display_token.png[title="Display Token", link=self, window=blank, width=100%]
++
+. When you click on it, you will see a page that shows you a CLI authentication command with both the *API Token* and the *Server URL* value.
++
+image::module-05-virt-acm/05-display_api_token_server_url.png[title="Display API Token, Server URL", link=self, window=blank, width=100%]
++
+. Copy and paste each of these values over into their respective fields on the *Details* page of the *Import an existing cluster* wizard. You may click on the *eye* button on the right side to see the *API Token* to ensure it copied correctly. When you are ready to continue, click the *Next* button.
++
+image::module-05-virt-acm/06-paste_api_token_server_url.png[title="Paste API Token, Server URL", link=self, window=blank, width=100%]
++
+. The next page in the wizard is the *Automation* page which allows you to configure automation templates using Ansible Automation Platform to perform various cluster managment duties in a multicluster environment. These actions are currently beyond the scope of this workshop, click the *Next* button to continue.
++
+image::module-05-virt-acm/07-auto_template.png[title="Automation Page", link=self, window=blank, width=100%]
++
+. The last page in the wizard is the *Review* page which allows you to confirm the details you have provided. When you are ready, click the *Import* button.
++
+image::module-05-virt-acm/08-import_cluster_review.png[title="Import Cluster Review", link=self, window=blank, width=100%]
++
+. You will see a brief pop-up that the process has begun and the cluster will start to import, the process should move fairly quickly, although this could be affected by the number of users attempting to import at the same time.
++
+image::module-05-virt-acm/09-import_in_progress.png[title="Import In Progress", link=self, window=blank, width=100%]
++
+. When the cluster import process completes you will see the cluster status listed as *Ready* and see a large amount of information about the cluster, including it's *Infrastructure* type, the current subscribed software *Channel*, and a list of *Labels* used to describe the cluster.
++
+image::module-05-virt-acm/10-import_complete.png[title="Import Complete", link=self, window=blank, width=100%]
 
 [[explore_cluster]]
 == Explore Managed Cluster Resources

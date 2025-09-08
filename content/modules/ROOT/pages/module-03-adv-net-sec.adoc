@@ -131,10 +131,12 @@ image::module-03-adv-net-sec/16-create_udn_dialog.png[title="Create UDN Dialog",
 +
 . You will be taken to the *UserDefinedNetwork details* page which shows information about the UDN you just created including details such as it's namespace, topology, subnet, and shows you that it has automatically created a Network Attachment Definition for you to connect your virtual machines.
 +
+image::module-03-adv-net-sec/17-udn_details.png[title="UDN Details", link=self, window=blank, width=100%]
++
 . Repeat these steps to create a UDN in the *test* namespace with subnet **192.168.254.0/24** and in the *prod* namespace with the subnet **192.168.255.0/24**
 . Once all three are created you should be able to click the *Project* dropdown at the top of the page and select *All Projects* to see them all listed.
 +
-image::module-03-adv-net-sec/17-udn_list.png[title="UDN List", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/18-udn_list.png[title="UDN List", link=self, window=blank, width=100%]
 
 === Create VMs and Attach Them to the UDNs
 
@@ -142,28 +144,17 @@ Now that we have defined our namespaces and created our UDNs, we need to put the
 
 . Click on *Virtualization* and *Catalog*. Ensure that you are in the *dev* project, and select the tile for the *Fedora VM* template.
 +
-image::module-03-adv-net-sec/18-vm_catalog.png[title="VM Catalog", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/19-vm_catalog.png[title="VM Catalog", link=self, window=blank, width=100%]
 +
 . After clicking you will be presented with the *Fedora VM* dialog. Notice that the VM template is connected to the OpenShift pod network by default, so we will need to customize the VM. Name your first VM *fedora-dev01*, and click on the *Customize VirtualMachine* button.
 +
-image::module-03-adv-net-sec/19-create_vm_dialog.png[title="Create VM Dialog", link=self, window=blank, width=100%]
+image::module-03-adv-net-sec/20-create_vm_dialog.png[title="Create VM Dialog", link=self, window=blank, width=100%]
 +
 . You will land on the *Customize and create Virtual Machine* page which allows you to customize the VM. Click on the *Network interfaces* tab, and then the *three-dot* menu to the right side of the default network adapter, and choose the option to *Edit*.
 +
-image::module-03-adv-net-sec/20-edit_network.png[title="Edit Network", link=self, window=blank, width=100%]
-+
-. A new dialog will appear called *Edit network interface*. On this, select the *dev/primary-udn* network from the drop-down list, and click on the *Save* button.
-+
-image::module-03-adv-net-sec/21-edit_network_interface.png[title="Edit Network", link=self, window=blank, width=100%]
-+
-. With the network adapter attached to our namespace-scoped UDN, we can now click the *Create VirtualMachine* button to provision our new VM.
-+
-image::module-03-adv-net-sec/22-create_virtualmachine.png[title="Create VirtualMachine", link=self, window=blank, width=100%]
-+
-. You will be returned to the tree-view on the *VirtualMachines* menu, and now see both the dev namespace, and the fedora-dev01 virtual machine listed as the machine provisions and starts up.
-+
-image::module-03-adv-net-sec/23-vm_details.png[title="VM Details", link=self, window=blank, width=100%]
-+
+
+
+
 . With this VM started, please repeat the steps to create an additional VM *fedora-dev02* in the *dev* namespace, followed by *fedora-test01* in the *test* namespace, and *fedora-prod01* in the *prod* namespace.
 . With the list of VM's created we can now test how traffic flows between the VMs both within and between projects.
 
@@ -171,12 +162,6 @@ image::module-03-adv-net-sec/23-vm_details.png[title="VM Details", link=self, wi
 
 === Configuring Advanced Connectivity
 
-
-
-[[net_observe]]
-== Examining Network Traffic with the Network Observability Operator
-
-<WRITE THIS SECTION>
 
 == Summary
 In this section we learned how to make use of the Network Observability Operator to scan our cluster and visualize traffic patterns in and out. We then learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to shape traffic between virtual guests and projects on the same cluster. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.

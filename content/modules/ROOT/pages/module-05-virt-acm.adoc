@@ -17,7 +17,9 @@ image::module-05-virt-acm/00-openshift_login.png[title="OpenShift Login", link=s
 +
 image::module-05-virt-acm/01-import_cluster.png[title="Import Cluster", link=self, window=blank, width=100%]
 +
-NOTE: It's possible that if other lab attendees have advanced past this step the page will not exactly reflect the screenshot above. You can still import your cluster and continue your lab.
+NOTE: It's possible that if other lab attendees have advanced past this step the page will not exactly reflect the screenshot above. You can still import your cluster and continue your lab by clicking the *Import Cluster* button at the top.
++
+image::module-05-virt-acm/01a-import_cluster_alt.png[title="Import Cluster Alt", link=self, window=blank, width=100%]
 +
 . The next screen you will be presented with is the *Details* page for the *Import an existing cluster* wizard. Fill in the fields on the page with the following values:
 +
@@ -68,7 +70,53 @@ image::module-05-virt-acm/10-import_complete.png[title="Import Complete", link=s
 [[explore_cluster]]
 == Explore Managed Cluster Resources
 
-<WRITE THIS SECTION>
+Now that we have discovered our cluster, lets take a look around at what benefits having Red Hat Advanced Cluster Managment for Kubernetes (RHACM) provides us when managing multiple clusters.
+
+. We can click on the *Nodes* tab to see a list of the physical nodes in our cluster and their current status. We can get a more descriptive view by clicking on a node itself. Try it now by clicking on *worker node 3* in your managed cluster.
++
+image::module-05-virt-acm/11-node_list.png[title="Node List", link=self, window=blank, width=100%]
++
+. A new tab will launch and display the node page from your mananged cluster, just as we reviewed in module 1.
++
+image::module-05-virt-acm/12-node_3_details.png[title="Node 3 Details", link=self, window=blank, width=100%] 
++
+. We can close this window and we can also see collected graphs on the managed cluster by click on the *Grafana* link at the top of the page. Click the link now.
++
+image::module-05-virt-acm/13-grafana_link.png[title="Grafana Link", link=self, window=blank, width=100%]
++
+. You will be prompted to login using your OpenShift credentials. Click the *Log in with OpenShift* button.
++
+image::module-05-virt-acm/14-log_in_grafana.png[title="Grafana Login", link=self, window=blank, width=100%]
++
+. The OpenShift login will appear and you will need to login with your associated *UserX* account and it's password.
++
+image::module-05-virt-acm/00-openshift_login.png[title="OpenShift Login", link=self, window=blank, width=100%]
++
+. You will land on the *ACM - Clusters Overview* dashboard where you will see basic info about every cluster in the lab environment that is being managed.
++
+image::module-05-virt-acm/15-default_grafana_dashboards.png[title="Default Grafana Dashboards", link=self, window=blank, width=100%]
++
+. You can click on the button for *All Dashboards* and select the dashboard for *Executive dashboards / Single Cluster View* in order to see how RHACM displays information about your cluster's virtual machine deployments in a centralized manner.
++
+image::module-05-virt-acm/16-virt_cluster_view.png[title="Virt Cluster View", link=self, window=blank, width=100%]
++
+. The top panel of the single cluster view presents you with a lot of handy information about the virtual machine workloads on your cluster, including the total number of virtual guests, their current status, and a breakdown of the operating systems reported by each VM.
++
+image::module-05-virt-acm/17-single_cluster_top.png[title="Single Cluster Top", link=self, window=blank, width=100%]
++
+. The bottom half of the single cluster view consisted of a number of collapsible panels that shows you important inforformation about resource utilization for your worker nodes and the virtual machines in your cluster. Click on *CPU Utilization* to expand it down and take a look. You can also reset the time window for collected stats with the drop down menu in the corner.
++
+image::module-05-virt-acm/18-single_cluster_bottom.png[title="Single Cluster Bottom", link=self, window=blank, width=100%]
++
+. When you are done exploring the single cluster view, you can close that tab.
+. You should now be back on the *ACM - Clusters Overview* page where you can select the *All Dashboards* button again and this time select *Executive dashboards / Clusters Overview* so that you can see a view of your entire multi-cluster estate.
++
+image::module-05-virt-acm/19-multi_cluster_view.png[title="Multi Cluster View", link=self, window=blank, width=100%]
++
+. You will find that this dashboard presents information on each of our clusters, the total nodes available, the total number of virtual machines, and the status of those virtual machines across each cluster. Also with warnings, guest OS summaries, and resource utilizations just as before, but on a larger scale.
++
+image::module-05-virt-acm/20-multi_cluster_dashboard.png[title="Multi Cluster Dashboard", link=self, window=blank, width=100%]
+
 
 [[deploy_workload]]
 == Deploy Virtual Machines Remotely

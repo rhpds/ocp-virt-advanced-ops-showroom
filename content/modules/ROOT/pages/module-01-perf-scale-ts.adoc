@@ -245,7 +245,7 @@ image::module-01-perf-scale-ts/37-project_mass.png[title="Mass VMs Project", lin
 +
 image::module-01-perf-scale-ts/38-select_all_start.png[title="Start All VMs", link=self, window=blank, width=100%]
 +
-. Once all of the VMs attempt to power on, there should be approximently 5-6 VMs that are currently in an error state.
+. Once all of the VMs attempt to power on, there should be approximently 5-7 VMs that are currently in an error state.
 +
 image::module-01-perf-scale-ts/39-after_start.png[title="VMs After Startup", link=self, window=blank, width=100%]
 +
@@ -254,7 +254,7 @@ image::module-01-perf-scale-ts/39-after_start.png[title="VMs After Startup", lin
 image::module-01-perf-scale-ts/40-num_errors.png[title="Error Details", link=self, window=blank, width=100%]
 +
 . Each of these VMs will show a *ErrorUnschedulable* in the status column, because the cluster is out of resources to schedule them.
-. In the left side navigation menu, click on *Compute* then click on *Nodes*. See that three of the worker nodes (nodes 2-4) have a large number of assigned pods, and a large amount of used memory, while worker node 1 is using much less by comparison. 
+. In the left side navigation menu, click on *Compute* then click on *Nodes*. See that three of the worker nodes (nodes 3-5) have a large number of assigned pods, and a large amount of used memory, while worker nodes 6 and 7 are using much less by comparison. 
 +
 image::module-01-perf-scale-ts/41-worker_nodes.png[title="Nodes", link=self, window=blank, width=100%]
 +
@@ -263,19 +263,19 @@ NOTE: In an OpenShift environment, the memory available is calculated based on m
 +
 . Click on worker node 3, you will be taken to the *Node details* page. Notice there are warnings about limited resources available on the node. You can also see the graph of memory utilization for the node, which shows the used memory in blue, and the requested amount as an orange dashed line as well.
 +
-image::module-01-perf-scale-ts/42-worker_node_3.png[title="Worker Node 2 Details", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/42-worker_node_3.png[title="Worker Node 3 Details", link=self, window=blank, width=100%]
 +
 . Click on the *Pods* tab at the top, and in the search bar, type `virt-launcher` to search for VMs on the node.
 +
-image::module-01-perf-scale-ts/43-vms_on_node_3.png[title="VMs On Worker Node 2", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/43-vms_on_node_3.png[title="VMs On Worker Node 3", link=self, window=blank, width=100%]
 +
-. Now, click on *Nodes* in the left-side navigation menu, and then click on worker node 1 which will bring you to it's *Node details* page. Notice there are no CPU or Memory warnings currently on the node. 
+. Now, click on *Nodes* in the left-side navigation menu, and then click on worker node 6 which will bring you to it's *Node details* page. Notice there are no CPU or Memory warnings currently on the node. 
 +
-image::module-01-perf-scale-ts/44-worker_node_1.png[title="Worker Node 1 Details", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/44-worker_node_6.png[title="Worker Node 6 Details", link=self, window=blank, width=100%]
 +
 . Click on the *Pods* tab at the top, and in the search bar, type `virt-launcher` to search VMs on the node. Notice that there are currently none.
 +
-image::module-01-perf-scale-ts/45-vms_on_node_1.png[title="VMs On Worker Node 1", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/45-vms_on_node_6.png[title="VMs On Worker Node 6", link=self, window=blank, width=100%]
 +
 . Click on the *Details* tab, and scroll down until until you see the *Taints* section where there is one taint defined.
 +
@@ -289,7 +289,7 @@ image::module-01-perf-scale-ts/48-remove_taint.png[title="Remove Taint", link=se
 +
 . Once the taint is removed, scroll back to the top and click on the *Pods* tab again and type `virt-launcher` into the search bar once more, you will see the unscheduleable VMs are being assigned to this node now.
 +
-image::module-01-perf-scale-ts/49-vms_node1_untainted.png[title="VMs On Worker Node 1", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/49-vms_node6_untainted.png[title="VMs On Worker Node 6", link=self, window=blank, width=100%]
 +
 . Return to the list of VMs in the *mass-vms* project by clicking on *Virtualization* and then clicking on *VirtualMachines* in the left side navigation menu to see all of the VMs now running.
 +
@@ -300,7 +300,7 @@ image::module-01-perf-scale-ts/50-mass_vms_running.png[title="Mass VMs Running",
 
 While we were able to have all of our virtual guests schedule correctly by adding another physical node, we often find that this can leave our node utilization slightly unbalanced across our cluster.
 
-We can check this easily by clicking on the Filter drop down menu and scrolling until we see how the VMs are laid out on each worker node.
+We can check this easily by clicking on the *Filter* drop down menu and scrolling until we see how the VMs are laid out on each worker node.
 
 image::module-01-perf-scale-ts/51-vms_on_nodes.png[title="VMs On Nodes", link=self, window=blank, width=100%]
 
@@ -322,35 +322,36 @@ image::module-01-perf-scale-ts/56-openshift_web_terminal.png[title="OpenShift We
 +
 [source,sh,role=execute]
 ----
-for i in {1..12}; do oc scale deployment/loadmaker-$i --replicas=5 -n mass-vms; done
+for i in {1..12}; do oc scale deployment/loadmaker-$i --replicas=6 -n mass-vms; done
 ----
 +
-. This should start putting additional pressure on each of our virtual machines in the mass-vms project and in turn the nodes hosting them. We should see the virtual guests begin to auto migrate to node 2 in order to balance out the cluster
+. This should start putting additional pressure on each of our virtual machines in the mass-vms project and in turn the nodes hosting them. 
+. If we now scale our cluster resources by adding an additional node, the cluster will attempt to balance out our resources by live migrating virtual machines.
 +
 image::module-01-perf-scale-ts/57-scale_loadmaker.png[title="CLI Scale Deployment", link=self, window=blank, width=100%]
 
 === Add an Additional Node to the Cluster
 
-. The first step we want to perform is to repeat the step we did in the earlier section by removing the taint from worker node 2 in our cluster. Do so by clicking on *Compute* followed by *Nodes* and click on worker node 2.
+. The first step we want to perform is to repeat the step we did in the earlier section by removing the taint from worker node 7 in our cluster. Do so by clicking on *Compute* followed by *Nodes* and click on worker node 7.
 +
-image::module-01-perf-scale-ts/52-compute_nodes_2.png[title="Compute Node List", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/52-compute_nodes_7.png[title="Compute Node List", link=self, window=blank, width=100%]
 +
-. On worker node 2, to introduce it as a virtual machine host in our cluster, we are going to do as we did previously by clicking on the *Details* tab.
+. On worker node 7, to introduce it as a virtual machine host in our cluster, we are going to do as we did previously by clicking on the *Details* tab.
 +
-image::module-01-perf-scale-ts/53-node_2_details.png[title="Node 2 Details", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/53-node_7_details.png[title="Node 7 Details", link=self, window=blank, width=100%]
 +
 . Scroll down under the *Labels* section and you will see the *Taints* section with one taint listed and a pencil icon next to it. Click the *pencil* icon to edit the node taint.
 +
-image::module-01-perf-scale-ts/54-node_2_taint.png[title="Node 2 Taint", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/54-node_7_taint.png[title="Node 7 Taint", link=self, window=blank, width=100%]
 +
 . In the window that pops up, click the *minus* sign to remove the taint, and then click the *Save* button.
 +
-image::module-01-perf-scale-ts/55-node_2_taint_window.png[title="Remove Taint Window", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/55-node_7_taint_window.png[title="Remove Taint Window", link=self, window=blank, width=100%]
 +
 . Return to the virtual machine view by clicking on *Virtualization* and *VirtualMachines* in the left side menu, click on *All projects* and finally  click on the *Filter* drop down. 
-. You can watch this view update in realtime, in a minute or two node 2 should appear and it's guest count should begin to rise as VMs are live migrated to the node.
+. You can watch this view update in realtime, in a minute or two node 7 should appear and it's guest count should begin to rise as VMs are live migrated to the node to balance out the cluster
 +
-image::module-01-perf-scale-ts/58-vms_on_nodes_2.png[title="OpenShift Web Terminal", link=self, window=blank, width=100%]
+image::module-01-perf-scale-ts/58-vms_on_nodes_7.png[title="VMs On Node 7", link=self, window=blank, width=100%]
 +
 NOTE: Default configuration for load-aware rebalacing is to refresh every 5 minutes, but for our lab we've tuned this variable to 30 seconds to make it easier to visualize in a shorter time period.
 +

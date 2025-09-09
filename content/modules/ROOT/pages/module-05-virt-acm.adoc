@@ -24,7 +24,7 @@ image::module-05-virt-acm/01a-import_cluster_alt.png[title="Import Cluster Alt",
 . The next screen you will be presented with is the *Details* page for the *Import an existing cluster* wizard. Fill in the fields on the page with the following values:
 +
 * *Name:* userX-virt-cluster
-* *Cluster set:* teamX
+* *Cluster set:* legacy-systems-inc
 * *Import mode:* Enter your server URL and API token for the existing cluster
 +
 image::module-05-virt-acm/02-import_cluster_details.png[title="Import Cluster Details", link=self, window=blank, width=100%] 
@@ -51,7 +51,7 @@ image::module-05-virt-acm/05-display_api_token_server_url.png[title="Display API
 +
 image::module-05-virt-acm/06-paste_api_token_server_url.png[title="Paste API Token, Server URL", link=self, window=blank, width=100%]
 +
-. The next page in the wizard is the *Automation* page which allows you to configure automation templates using Ansible Automation Platform to perform various cluster managment duties in a multicluster environment. These actions are currently beyond the scope of this workshop, click the *Next* button to continue.
+. The next page in the wizard is the *Automation* page which allows you to configure automation templates using Ansible Automation Platform to perform various cluster management duties in a multicluster environment. These actions are currently beyond the scope of this workshop, click the *Next* button to continue.
 +
 image::module-05-virt-acm/07-auto_template.png[title="Automation Page", link=self, window=blank, width=100%]
 +
@@ -63,7 +63,7 @@ image::module-05-virt-acm/08-import_cluster_review.png[title="Import Cluster Rev
 +
 image::module-05-virt-acm/09-import_in_progress.png[title="Import In Progress", link=self, window=blank, width=100%]
 +
-. When the cluster import process completes you will see the cluster status listed as *Ready* and see a large amount of information about the cluster, including it's *Infrastructure* type, the current subscribed software *Channel*, and a list of *Labels* used to describe the cluster.
+. When the cluster import process completes you will see the cluster status listed as *Ready* and see a large amount of information about the cluster, including it's *Infrastructure* type, the current subscribed software *Channel*, it's *Cluster set*, links to open it's console directly, and a list of *Labels* used to describe the cluster.
 +
 image::module-05-virt-acm/10-import_complete.png[title="Import Complete", link=self, window=blank, width=100%]
 

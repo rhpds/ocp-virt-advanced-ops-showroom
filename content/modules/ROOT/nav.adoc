@@ -15,10 +15,8 @@
 ** xref:module-02-sec-comp.adoc#cluster_rbac[Configuring Role-based Access Control for Cluster Roles]
 
 * xref:module-03-adv-net-sec.adoc[Advanced Networking and Security]
-** xref:module-03-adv-net-sec.adoc#net_observe[Examining Network Traffic with the Network Observability Operator]
-** xref:module-03-adv-net-sec.adoc#net_policy[Configure Network Policies to Manage VM Traffic]
-*** xref:module-03-adv-net-sec.adoc#net_pol_egress[Configure Network Policies to Manage Cluster Egress]
-*** xref:module-03-adv-net-sec.adoc#net_pol_projects[Configure Network Policies to Manage VM Traffic Between Projects]
+** xref:module-03-adv-net-sec.adoc#net_pol_egress[Configure Network Policies to Manage Cluster Egress]
+** xref:module-03-adv-net-sec.adoc#udn_projects[Configure UDN to Manage VM Traffic Between Projects]
 
 * xref:module-04-virt-automation.adoc[Automation of Virtual Machines]
 ** xref:module-04-virt-automation.adoc#dynamic_inventory[Creating a Dynamic Inventory for OpenShift Virtual Machines]
@@ -31,7 +29,7 @@
 * xref:module-05-virt-acm.adoc[Advanced Management of Virtual Machines]
 ** xref:module-05-virt-acm.adoc#discover_cluster[Discover Your Cluster]
 ** xref:module-05-virt-acm.adoc#explore_cluster[Explore Managed Cluster Resources]
-** xref:module-05-virt-acm.adoc#deploy_workload[Deploy Virtual Machines Remotely]
+** xref:module-05-virt-acm.adoc#manage_vms[Manage VMs From RHACM]
 
 * xref:conclusion.adoc[Conclusion]
 ** xref:conclusion.adoc#key_takeaways[Key Takeaways]

@@ -2,15 +2,7 @@
 
 == Introduction
 
-With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will learn more about visualizing network traffic flows the the Network Observability Operator, and how to shape and secure our network by implementing Network Policies.
-
-[[net_policy]]
-== Configure Network Policies to Manage VM Traffic
-
-In Red Hat OpenShift administrators can configure Network Policies to further secure their environments, and the virtual guests that run there.
-
-In this portion of the lab we are going to configure a virtual machine and then apply a network policy that prevents its egress to the world.
-
+With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will learn how to shape and secure our network by implementing Network Policies and how to automatically segregate our projects and their virtual workloads using UDN.
 
 [[net_pol_egress]]
 == Configure Network Policies to Manage Cluster Egress
@@ -96,8 +88,8 @@ image::module-03-adv-net-sec/10-ping_site_deny.png[title="Egress Blocked", link=
 +
 image::module-03-adv-net-sec/11-delete_policy.png[title="Delete Policy", link=self, window=blank, width=100%]
 
-[[net_pol_projects]]
-== Configure Network Policies to Manage VM Traffic Between Projects
+[[udn_projects]]
+== Configure UDN to Manage VM Traffic Between Projects
 
 While it may seem like a basic security configuration to ensure that virtual machines are unable to reach unwanted external website, network policy also provides us with a diverse set of tools that also allow us to shape traffic between our VMs and the projects in which they reside.
 
@@ -152,16 +144,16 @@ image::module-03-adv-net-sec/20-create_vm_dialog.png[title="Create VM Dialog", l
 +
 . You will land on the *Customize and create Virtual Machine* page which allows you to customize the VM. Click on the *Network interfaces* tab, and then the *three-dot* menu to the right side of the default network adapter, and choose the option to *Edit*.
 +
-
-
-
 . With this VM started, please repeat the steps to create an additional VM *fedora-dev02* in the *dev* namespace, followed by *fedora-test01* in the *test* namespace, and *fedora-prod01* in the *prod* namespace.
-. With the list of VM's created we can now test how traffic flows between the VMs both within and between projects.
+. With the list of VM's created we can now test how traffic flows and doesn't flow between the VMs both within and between projects.
 
 === Testing VM Connectivity
+
+
+
 
 === Configuring Advanced Connectivity
 
 
 == Summary
-In this section we learned how to make use of the Network Observability Operator to scan our cluster and visualize traffic patterns in and out. We then learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to shape traffic between virtual guests and projects on the same cluster. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.
+In this section we learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to shape traffic between virtual guests and projects on the same cluster by leveraging UDN's native network segregation. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.

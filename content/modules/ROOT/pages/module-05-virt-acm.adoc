@@ -117,8 +117,33 @@ image::module-05-virt-acm/19-multi_cluster_view.png[title="Multi Cluster View", 
 +
 image::module-05-virt-acm/20-multi_cluster_dashboard.png[title="Multi Cluster Dashboard", link=self, window=blank, width=100%]
 
+Now that we know how to observe the status of our virtual estate across a multicluster environment, lets see how we can manage it. 
 
-[[deploy_workload]]
-== Deploy Virtual Machines Remotely
+[[manage_vms]]
+== Manage VMs From RHACM
 
-<WRITE THIS SECTION>
+. Starting with the left side menu, click on *Infrastructure* followed by *Virtual machines*.
++
+image::module-05-virt-acm/21-infrastructure-vms.png[title="Left Side Menu", link=self, window=blank, width=100%]
++
+. You will be brought to a page that lists all of the virtual machines that RHACM can currently see. 
+. The columns present help you sort and identify specific virtual machines by their *Name*, *Cluster*, *Namespace*, or *Node*. 
+. The list of columns is fully customizable, and so are the number of machines displayed on the page.
++
+image::module-05-virt-acm/22-virtual_machine_list.png[title="Virtual Machine List", link=self, window=blank, width=100%]
++
+. The *Launch links* button provides you with shortcut links that open a new tab to either the virtual machine details page, the virtual machine console, or the observability metrics, all from one easy access point.
++
+image::module-05-virt-acm/23-launch_links.png[title="Launch Links", link=self, window=blank, width=100%]
++
+. While clicking the *Virtual machine details* link from *Launch links* opens the VM management in a new tab, if you had to manipulate a number of VMs quickly it would be much nicer to do it directly from RHACM.
+. You can do exactly that by clicking on the 3-dot menu on the right side of each VM, and you will see the list that appears is almost exactly the same as the actions list you see on the *Virtual machine details* page.
+. You can use this menu to stop/start/restart a VM, take a snapshot, or edit the machine's definition via YAML.
++ 
+image::module-05-virt-acm/24-vm_management.png[title="Virtual Machine Management", link=self, window=blank, width=100%]
+
+== Summary
+
+In this module we learned how to discover, observe and manage our virtualized workloads using Red Hat Advanced Cluster Managment for Kubernetes (RHACM). The content in this module is just the tip of the iceberg when it comes to what RHACM can do in a multicluster OpenShift Virtualization environment. As mentioned before Ansible automation can be leveraged to perform automated actions across multiple clusters, and powerful tools like GitOps can be leveraged to deploy sets of VMs and ensure that cluster configurations are kept in sync across the entire virtual estate.
+
+

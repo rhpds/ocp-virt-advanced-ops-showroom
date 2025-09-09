@@ -2,7 +2,8 @@
 
 == Introduction
 
-With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will learn how to shape and secure our network by implementing Network Policies and how to automatically segregate our projects and their virtual workloads using UDN.
+With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will be introduced how to leverage the Network Observability operator to visualize our network traffic, how to shape and secure our network by implementing Network Policies, and how to automatically segregate our projects and their virtual workloads using UDN.
+
 
 [[net_pol_egress]]
 == Configure Network Policies to Manage Cluster Egress
@@ -138,22 +139,53 @@ Now that we have defined our namespaces and created our UDNs, we need to put the
 +
 image::module-03-adv-net-sec/19-vm_catalog.png[title="VM Catalog", link=self, window=blank, width=100%]
 +
-. After clicking you will be presented with the *Fedora VM* dialog. Notice that the VM template is connected to the OpenShift pod network by default, so we will need to customize the VM. Name your first VM *fedora-dev01*, and click on the *Customize VirtualMachine* button.
+. After clicking you will be presented with the *Fedora VM* dialog. Notice that the VM template shows that it is connected to the OpenShift pod network by default, however because of the label we placed on the namespace, it knows that it should default to using the UDN. Name your first VM *fedora-dev01*, and click on the *Quick create VirtualMachine* button.
 +
 image::module-03-adv-net-sec/20-create_vm_dialog.png[title="Create VM Dialog", link=self, window=blank, width=100%]
-+
-. You will land on the *Customize and create Virtual Machine* page which allows you to customize the VM. Click on the *Network interfaces* tab, and then the *three-dot* menu to the right side of the default network adapter, and choose the option to *Edit*.
 +
 . With this VM started, please repeat the steps to create an additional VM *fedora-dev02* in the *dev* namespace, followed by *fedora-test01* in the *test* namespace, and *fedora-prod01* in the *prod* namespace.
 . With the list of VM's created we can now test how traffic flows and doesn't flow between the VMs both within and between projects.
 
 === Testing VM Connectivity
 
+. To validate connectivity within namespaces we can just attempt a few simple pings between our virtual guests.. Click on *Virtualization* and *VirtualMachines* in the left side menu, and click on your *dev* namespace to see the two VMs that you provisioned there.
+. Notice that they both have IP addresses from your UDN subnet, make note of these two IP addresses.
++
+image::module-03-adv-net-sec/21-dev-vms.png[title="Dev VMs", link=self, window=blank, width=100%]
++
+. Click on fedora-dev01, and click the button to launch it's web console.
++
+image::module-03-adv-net-sec/22-fedora-dev01.png[title="Fedora-Dev01 Details", link=self, window=blank, width=100%]
++
+. Use the built-in Copy/Paste functionality to log into the system with the credentials provided.
++
+image::module-03-adv-net-sec/23-console.png[title="Fedora-Dev01 Console", link=self, window=blank, width=100%]
++
+NOTE: You may recieve a prompt to allow this feature, click the *Allow* button.
++
+. When you are logged in, attempt to ping the other VM in our dev namespace *fedora-dev02*. The IP pings successfully.
++
+image::module-03-adv-net-sec/24-ping_success.png[title="Fedora-Dev02 Ping Success", link=self, window=blank, width=100%]
++
+. Now that we have tested the ping within our namespace, lets try between namespaces and networks to see what happens.
+. Return to the tab where you have the *fedora-dev01* details pulled up and click on the *test* project in the center column.
++ 
+image::module-03-adv-net-sec/25-fedora_test_01.png[title="Fedora-Test01", link=self, window=blank, width=100%]
++
+. Make note of the IP address that the *fedora-test01* VM has.
+. Now return to the tab where you have the console for *fedora-dev01* open and attempt to ping this IP address.
++
+image::module-03-adv-net-sec/26-ping_fail.png[title="Fedora-Test02 Ping Fail", link=self, window=blank, width=100%]
++
+. You can see that the ping attempt, across networks and namespaces fails, showing how UDN helps segregate networks and workloads by default.
++
+NOTE: With advanced networking configurations it is possible to enable routing between these subnets, but that is currently out of scope for this lab.
 
+[[net_observe]]
+== Examining Network Traffic with the Network Observability Operator
 
-
-=== Configuring Advanced Connectivity
+<WRITE THIS SECTION>
 
 
 == Summary
-In this section we learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to shape traffic between virtual guests and projects on the same cluster by leveraging UDN's native network segregation. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.
+In this section we learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to isolate traffic between virtual guests and projects on the same cluster by leveraging UDN's native network segregation. We also took a brief look at the benefits provided by the Network Observability operator. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.

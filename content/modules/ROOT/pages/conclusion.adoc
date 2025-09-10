@@ -25,7 +25,7 @@ We hope you have enjoyed {lab_name} and learning more about *OpenShift Virtualiz
 Click the link https://www.redhat.com/en/resources/15-reasons-adopt-openshift-virtualization-ebook[here^] to read it now.
 
 
-=== Free Ebook: Red HAt Ansible Automation Platform: A Beginners Guide
+=== Free Ebook: Red Hat Ansible Automation Platform: A Beginners Guide
 
 * Take a brief look at Ansible Automation Platform.
 * Explore the business value of integrateing automation into your organization.
@@ -54,3 +54,22 @@ Click the link https://www.redhat.com/en/services/training/managing-virtual-mach
 * Create automation execution environments to bundle and distribute the dependencies needed to run automation code.
 
 Click the link https://www.redhat.com/en/services/training/au374-developing-advanced-automation-red-hat-ansible-automation-platform[here^] to check it out.
+
+=== Red Hat Learning Services: AU480 Multicluster Management with Red Hat OpenShift Platform Plus
+
+* Deploy RHACM in a hub cluster and use it to discover other clusters.
+* Define and apply cluster configuration policies, and detect and remediate non-coforming configurations.
+* Identify and compare applicaiton placement policies and resource utilization on multiple clusters.
+* Deploy Red Hat Quay and Red Hat Advanced Cluster Security for Kubernetes in the hub cluster.
+* Integrate all of these tools in workflows to uncover the power of OpenShift Platform Plus.
+
+Click the link https://www.redhat.com/en/services/training/do480-multicluster-management-red-hat-openshift-platform-plus[here^] to check it out.
+
+=== Multi-cluster Red Hat OpenShift Virtualization with Red Hat Advanced Cluster Management
+
+* A technology overview about the Red Hat products used to deploy the solution.
+* A review of the benefits to be realized by deploying OpenShift Virtualization in a multi-cluster footprint.
+* Reference solution architecture and opinionated design for the deployment of a multi-cluster solution.
+* Sample deployment and management workflows using Ansible Automation Platform to automate various administrative tasks.
+
+Click https://access.redhat.com/articles/7122874[here^] to check it out. 

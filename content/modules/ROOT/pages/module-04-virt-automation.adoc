@@ -388,7 +388,7 @@ image::module-04-virt-automation/20-stopped_vms.png[title="Stopped VMs", link=se
 . Once you have created these Job templates select the *Launch template* button on the top right corner to run the job and notice the changes of these VMs within the OpenShift console. Each VM should start back up after executing the *Start VMs* template, and then each machine should reboot after executing the *Restrat VMs* template.
 
 [[vm_mgmt_patch]]
-=== Patching your VMs
+=== Patching Guest VMs
 
 In this exercise, you’ll automate the patching of RHEL virtual machines by applying only security-related updates using Ansible Automation Platform.
 

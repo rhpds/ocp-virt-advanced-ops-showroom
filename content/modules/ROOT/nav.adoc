@@ -17,6 +17,7 @@
 * xref:module-03-adv-net-sec.adoc[Advanced Networking and Security]
 ** xref:module-03-adv-net-sec.adoc#net_pol_egress[Configure Network Policies to Manage Cluster Egress]
 ** xref:module-03-adv-net-sec.adoc#udn_projects[Configure UDN to Manage VM Traffic Between Projects]
+** xref:module-03-adv-net-sec.adoc#net_observ[Examining Network Traffic with the Network Observability Operator]
 
 * xref:module-04-virt-automation.adoc[Automation of Virtual Machines]
 ** xref:module-04-virt-automation.adoc#dynamic_inventory[Creating a Dynamic Inventory for OpenShift Virtual Machines]

@@ -181,7 +181,7 @@ image::module-03-adv-net-sec/26-ping_fail.png[title="Fedora-Test02 Ping Fail", l
 +
 NOTE: With advanced networking configurations it is possible to enable routing between these subnets, but that is currently out of scope for this lab.
 
-[[net_observe]]
+[[net_observ]]
 == Examining Network Traffic with the Network Observability Operator
 
 Another powerful tool that can be used to manage your networking environment is the Network Observability operator. The Network Observability operator analyzes traffic entering and leaving the cluster, and traveling between namespaces to help you vizualize what your virtual and container-based workloads are communicating with.
@@ -229,4 +229,4 @@ The Network Observability operator is a very powerful tool for OpenShift that eq
 
 
 == Summary
-In this section we learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to isolate traffic between virtual guests and projects on the same cluster by leveraging UDN's native network segregation. We also took a brief look at the benefits provided by the Network Observability operator. Overall Network Policies are quite robust, and allow you to implement microsegmentation policies helping to shape the traffic flow both inside and outside of your cluster, between virtual guests in different or even the same OpenShift project.
+In this section we learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to isolate traffic between virtual guests and projects on the same cluster by leveraging UDN's native network segregation. We also took a brief look at the benefits provided by the Network Observability operator, and how it can make visualizing the network traffic flow in your cluster much easier.

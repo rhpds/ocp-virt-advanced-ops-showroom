@@ -2,7 +2,7 @@
 
 == Introduction
 
-With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will be introduced how to leverage the Network Observability operator to visualize our network traffic, how to shape and secure our network by implementing Network Policies, and how to automatically segregate our projects and their virtual workloads using UDN.
+With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will introduce how to leverage the Network Observability operator to visualize our network traffic, how to shape and secure our network by implementing Network Policies, and how to automatically segregate our projects and their virtual workloads using UDN.
 
 
 [[net_pol_egress]]
@@ -92,9 +92,9 @@ image::module-03-adv-net-sec/11-delete_policy.png[title="Delete Policy", link=se
 [[udn_projects]]
 == Configure UDN to Manage VM Traffic Between Projects
 
-While it may seem like a basic security configuration to ensure that virtual machines are unable to reach unwanted external website, network policy also provides us with a diverse set of tools that also allow us to shape traffic between our VMs and the projects in which they reside.
+While it may seem like a basic security configuration to ensure that virtual machines are unable to reach unwanted external website, network policy also provides us with a diverse set of tools that allow us to shape traffic between our VMs and the projects in which they reside.
 
-NOTE: For this section we are going to make use of UDN (User Defined Networks) and configure our three namespaces for dev, test, and production so that they have limited network traffic between the resources defined in each one. Currently for a namespace to make use of UDN functionality it must have a specialized label applied at creation that allows it to override the default cluster networking configuration.
+NOTE: For this section we are going to make use of UDN (User Defined Networks) and configure our three namespaces for dev, test, and production so that they have limited network traffic between the resources defined in each one. Currently for a namespace to make use of Primary UDN functionality it must have a specialized label applied at creation that allows it to override the default cluster networking configuration.
 
 === Create UDN Enabled Namespaces
 
@@ -208,7 +208,7 @@ image::module-03-adv-net-sec/31-network_traffic_resource.png[title="Network Traf
 +
 image::module-03-adv-net-sec/32-traffic_flows.png[title="Traffic Flows", link=self, window=blank, width=100%]
 +
-. An additional, but sometimes chaotic, graphic that is on our list is that of the topology map, which heps to visualize further incoming and outgoing traffic from specific pods. Like the *Overview* it can be sorted by Node, Namespace, Owner, and Resource. Click on the *Topology* tab to initalize this view, and sort by *Namespace* for a clean view of our cluster applications and their network traffice.
+. An additional, but sometimes chaotic, graphic that is on our list is that of the topology map, which helps to visualize further incoming and outgoing traffic from specific pods. Like the *Overview* it can be sorted by Node, Namespace, Owner, and Resource. Click on the *Topology* tab to initalize this view, and sort by *Namespace* for a clean view of our cluster applications and their network traffic.
 +
 image::module-03-adv-net-sec/33-topology_namespace.png[title="Topology Namespace", link=self, window=blank, width=100%]
 +

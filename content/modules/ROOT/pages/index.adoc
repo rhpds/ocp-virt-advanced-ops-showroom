@@ -4,7 +4,7 @@
 
 == Introduction
 
-In today's dynamic IT landscape, organizations are grappling with the complexities of managing traditional virtualization alongside the demands of cloud-native innovation. This workshop allows IT professionals to confidently navigate this hybrid reality, demonstrating how Red Hat OpenShift Virtualization, coupled with Ansible Automation Platform and Red Hat Advanced Cluster Management for Kuberentes provides a unified, efficient, and secure platform for all workloads, whether virtual or container-based.
+In today's dynamic IT landscape, organizations are grappling with the complexities of managing traditional virtualization alongside the demands of cloud-native innovation. This workshop allows IT professionals to confidently navigate this hybrid reality, demonstrating how Red Hat OpenShift Virtualization, coupled with Ansible Automation Platform and Red Hat Advanced Cluster Management for Kubernetes provides a unified, efficient, and secure platform for all workloads, whether virtual or container-based.
 
 In this lab, which is a follow-up to our very popular https://www.redhat.com/en/events/na-red-hat-openshift-virtualization[Experience OpenShift Virtualization Roadshow^] lab, we intend to equip you with the knowledge and tools to manage your environment and perform critical operational tasks often required of virtual machine administrators from day-2 onward. This ensures that your virtualized workloads are efficiently managed and maintained long after the initial deployment.
 

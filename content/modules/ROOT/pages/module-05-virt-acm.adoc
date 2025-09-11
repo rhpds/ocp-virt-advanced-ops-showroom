@@ -94,6 +94,8 @@ image::module-05-virt-acm/00-openshift_login.png[title="OpenShift Login", link=s
 +
 . You will land on the *ACM - Clusters Overview* dashboard where you will see basic info about every cluster in the lab environment that is being managed.
 +
+NOTE: Depending on when you reach this stage, it may take a few moments for data to populate in the graphs.
++
 image::module-05-virt-acm/15-default_grafana_dashboards.png[title="Default Grafana Dashboards", link=self, window=blank, width=100%]
 +
 . You can click on the button for *All Dashboards* and select the dashboard for *Executive dashboards / Single Cluster View* in order to see how RHACM displays information about your cluster's virtual machine deployments in a centralized manner.
@@ -119,12 +121,14 @@ image::module-05-virt-acm/20-multi_cluster_dashboard.png[title="Multi Cluster Da
 
 Now that we know how to observe the status of our virtual estate across a multicluster environment, lets see how we can manage it. 
 
+NOTE: You may now close the tab where Grafana launched and return to the RHACM console
+
 [[manage_vms]]
 == Manage VMs From RHACM
 
 . Starting with the left side menu, click on *Infrastructure* followed by *Virtual machines*.
 +
-image::module-05-virt-acm/21-infrastructure-vms.png[title="Left Side Menu", link=self, window=blank, width=100%]
+image::module-05-virt-acm/21-infrastructure_vms.png[title="Left Side Menu", link=self, window=blank, width=100%]
 +
 . You will be brought to a page that lists all of the virtual machines that RHACM can currently see. 
 . The columns present help you sort and identify specific virtual machines by their *Name*, *Cluster*, *Namespace*, or *Node*. 

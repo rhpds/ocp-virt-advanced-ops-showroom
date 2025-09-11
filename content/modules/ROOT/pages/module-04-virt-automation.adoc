@@ -23,7 +23,7 @@ NOTE: The Ansible Automation Platform console has a 5 minute timeout for admin u
 
 OBJECTIVE:
 
-Dynamic inventories allow Ansible Automation Platform (AAP) to automatically fetch and update the inventory of systems from external sources, eliminating the need for manual inventory management.
+Dynamic inventories allow Ansible Automation Platform (AAP) to automatically fetch and update the list of systems from external sources, eliminating the need for manual management.
 
 In this lab, we will configure a dynamic inventory to pull data from OpenShift Virtualization. This will enable AAP to manage OpenShift VMs residing in the *vms-aap-day2* namespace of an OCP cluster.
 

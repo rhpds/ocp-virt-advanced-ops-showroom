@@ -13,7 +13,7 @@ Your local admin login is available with the following credentials:
 * *User:* `{openshift_cluster_admin_username}`
 * *Password:* `{openshift_cluster_admin_password}`
 
-You will first see a page that asks you to choose an authenication provider, click on *htpasswd_provider*.
+You will first see a page that asks you to choose an authentication provider, click on *htpasswd_provider*.
 
 image::module-01-perf-scale-ts/00-htpasswd_login.png[title="OpenShift Authentication", link=self, window=blank, width=100%]
 
@@ -31,7 +31,7 @@ A very important task for administrators is often to be able to assess cluster p
 To begin, lets look at the metrics for the nodes that make up our cluster.
 
 . On the left side navigation menut click on *Compute*, and then click on *Nodes*.
-. From the *Nodes* page, you can se each node in your cluster, their status, role, the number of pods they are currently hosting, and physical attributes like memory and cpu utilization.
+. From the *Nodes* page, you can see each node in your cluster, their status, role, the number of pods they are currently hosting, and physical attributes like memory and cpu utilization.
 +
 image::module-01-perf-scale-ts/02-node_list.png[title="Nodes", link=self, window=blank, width=100%]
 +
@@ -108,13 +108,13 @@ image::module-01-perf-scale-ts/13-add_query.png[title="Add_Query", link=self, wi
 sum(rate(kubevirt_vmi_vcpu_wait_seconds_total{name='winweb01',namespace='webapp-vms'}[5m])) BY (name, namespace)
 ----
 +
-. Click the *Run queries* button and see how the graph updates. A new line graph will along the bottom of the chart which shows that since the machine has started, there has never been a case where it was not under severe load. Our load generator is working as intended to really hammer the VM.
+. Click the *Run queries* button and see how the graph updates. A new line graph will appear along the bottom of the chart which shows that since the machine has started, there has never been a case where it was not under severe load. Our load generator is working as intended to really hammer the VM.
 +
 image::module-01-perf-scale-ts/14-example_query.png[title="Sample Custom Query", link=self, window=blank, width=100%]
 
 === Examining Dashboards
 
-Another powerful feature of OpenShift is being able to use the *Cluster Observability Operator* to display detailed dashboards of cluster performance. Lets check some of those out now.
+Another powerful feature of OpenShift is being able to use the *Cluster Observability Operator* to display detailed dashboards of cluster performance. Let's check some of those out now.
 
 . From the left side navigation menu, click on *Observe*, and then *Dashboards*.
 +
@@ -140,7 +140,8 @@ Now that we have completed this section determining how to locate and display al
 
 The winweb01, winweb02, and database servers work together to provide a simple web-based application that load-balances web requests between the two web servers to reduce load and increase performance. At this time, only one webserver is up, and as we have previously explored is now under high demand. In this lab section we will see horizontally scaling the webservers can help reduce load on the VMs, and how to diagnose this using the metrics, and graphs that are native to OpenShift Virtualization.
 
-. Click on *winweb01* which should currently be running. This will bring you to the *VirtualMachine details* page.
+. Click on *Virtualization* and then *VirtualMachines* in the left side menu.
+. Now click on *winweb01* which should currently be running. This will bring you to the *VirtualMachine details* page.
 +
 image::module-01-perf-scale-ts/23-vm_details.png[title="VM Details", link=self, window=blank, width=100%]
 +
@@ -237,7 +238,7 @@ NOTE: In this lab environment we are not actually adding an additional physical 
 +
 image::module-01-perf-scale-ts/36-verify_oc.png[title="Verify Running VMs", link=self, window=blank, width=100%]
 +
-. Click on the *mass-vm* project to list the virtual machines there. Click on *1 - 15 of 30* drop down and change it to *50 per page* to display all of the VMs.
+. Click on the *mass-vm* project to list the virtual machines there. Click on *1 - 15 of 36* drop down and change it to *50 per page* to display all of the VMs.
 +
 image::module-01-perf-scale-ts/37-project_mass.png[title="Mass VMs Project", link=self, window=blank, width=100%]
 +

@@ -111,7 +111,7 @@ In this section we are going to choose one of our failures from the previous sca
 +
 Note: The *rhcos4-moderate-worker-coreos-pti-kernel-argument* is required to isolate kernel and userspace page tables to prevent attacks like the https://bugzilla.redhat.com/show_bug.cgi?id=1519781[Meltdown^] vulnerability.
 +
-Click on the *Compliance Remediation* tab, and in the *Name* search bar type the term _pti-kernel_ to find the suggested remediation for *rhcos4-moderate-worker-coreos-pti-kernel-argument*. When the result appears, click the three-dot menu on the right, and select *Edit ComplianceRemediation* from the menu that appears.
+Click on the *Compliance Remediation* tab, and in the *Name* search bar type the term `pti-kernel` to find the suggested remediation for *rhcos4-moderate-worker-coreos-pti-kernel-argument*. When the result appears, click the three-dot menu on the right, and select *Edit ComplianceRemediation* from the menu that appears.
 +
 image::module-02-sec-comp/14-compliance_remediation.png[title="Compliance Remediation", link=self, window=blank, width=100%]
 +

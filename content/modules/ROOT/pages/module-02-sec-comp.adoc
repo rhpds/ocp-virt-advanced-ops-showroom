@@ -59,8 +59,8 @@ We do this by navigating to the *Scan Setting Binding* tab, and clicking the *Cr
 image::module-02-sec-comp/09-create_scansettingbinding.png[title="Create ScanSettingBinding", link=self, window=blank, width=100%]
 +
 . In the ScanSettingBinding YAML details, let us make a few changes:
-  * The *metadata/name* value should be set to `fedramp01`
-  * The *settingsRef/name* field is set to `scan01` which we created earlier.
+  * The *metadata.name* value should be set to `fedramp01`
+  * The *settingsRef.name* field is set to `scan01` which we created earlier.
 . Click the *Create* button.
 +
 NOTE: The profile is set to rhcos4-moderate (the fedramp moderate profile) by default.
@@ -115,7 +115,7 @@ Click on the *Compliance Remediation* tab, and in the *Name* search bar type the
 +
 image::module-02-sec-comp/14-compliance_remediation.png[title="Compliance Remediation", link=self, window=blank, width=100%]
 +
-. This will launch the ComplianceRemediation details page with a YAML block describing the current status. 
+. This will launch the ComplianceRemediation details page with a YAML block describing the current status.
 . Under the *spec* section you will see that the current *apply* state is *false*, and the *kernelArugument* that will be applied is that *pti=on*. Under the *status* section we see that the remediation state is *NotApplied.*
 +
 image::module-02-sec-comp/15-compred_details.png[title="Compliance Remediation Details", link=self, window=blank, width=100%]
@@ -194,7 +194,7 @@ image::module-02-sec-comp/28-create_binding.png[title="Create Binding", link=sel
 +
 . This will bring you to the *Create RoleBinding* page, on this page select the following to create a read-only role binding for the auditor, and click the *Create* button:
   * *Binding type:* Cluster-wide role binding
-  * *Name:* cluster_readonly 
+  * *Name:* cluster_readonly
   * *Role name:* view
 +
 image::module-02-sec-comp/29-role_binding_details.png[title="RoleBinding Details", link=self, window=blank, width=100%]

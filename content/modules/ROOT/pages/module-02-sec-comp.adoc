@@ -49,7 +49,7 @@ A quick glimpse at the side panel shows that there are quite a few of them.
 +
 image::module-02-sec-comp/08-rhcos4_mod_rules.png[title="RHCOS4-Moderate Rules", link=self, window=blank, width=100%]
 +
-. When you are done reviewing the rules, return to the *Operator details* page by clicking your browser's _back button_ twice.
+. When you are done reviewing the rules, return to the *Operator details* page by clicking your browser's *back button* twice.
 +
 NOTE: Additional details on the profiles available can be found https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/security_and_compliance/compliance-operator#compliance-operator-supported-profiles[here^].
 +
@@ -120,7 +120,7 @@ image::module-02-sec-comp/14-compliance_remediation.png[title="Compliance Remedi
 +
 image::module-02-sec-comp/15-compred_details.png[title="Compliance Remediation Details", link=self, window=blank, width=100%]
 +
-. Under the *spec* section change the *apply* field to *true* and click the *Save* button.
+. Under the *spec* section change the *apply* field to `true` and click the *Save* button.
 +
 image::module-02-sec-comp/16-compred_true.png[title="Compliance Remediation True", link=self, window=blank, width=100%]
 +
@@ -133,7 +133,7 @@ image::module-02-sec-comp/17-managed_resource.png[title="Managed Resource Prompt
 +
 image::module-02-sec-comp/18-nodes_cordoned.png[title="Node 3 Cordoned", link=self, window=blank, width=100%]
 +
-. You will see a node enter the _SchedulingDisabled_ state to begin it's remediation. Click on that node for it's Node details page, and notice that the event log shows the node was cordoned to apply the update, and you can also see CPU and Memory utilization drop off as the node was successfully drained.
+. You will see a node enter the _SchedulingDisabled_ state to begin its remediation. Click on that node for its Node details page, and notice that the event log shows the node was cordoned to apply the update, and you can also see CPU and Memory utilization drop off as the node was successfully drained.
 +
 image::module-02-sec-comp/19-node_3_updating.png[title="Node 3 Updating", link=self, window=blank, width=100%]
 +
@@ -156,7 +156,7 @@ image::module-02-sec-comp/21-delete_scan_prompt.png[title="Delete Scan Prompt", 
 +
 image::module-02-sec-comp/22-new_compliance_scan.png[title="New Compliance Scan", link=self, window=blank, width=100%]
 +
-. As before this can will take a few minutes to complete, but once it is complete the results can be viewed by clicking on the *ComplianceCheckResult* tab, and searching for the *rhcos4-moderate-worker-coreos-pti-kernel-argument* and noticing that it's label is now *check-status=PASS* instead of *FAIL*
+. As before this can will take a few minutes to complete, but once it is complete the results can be viewed by clicking on the *ComplianceCheckResult* tab, and searching for the *rhcos4-moderate-worker-coreos-pti-kernel-argument* and noticing that its label is now *check-status=PASS* instead of *FAIL*
 +
 image::module-02-sec-comp/23-check_status_pass.png[title="Check Status Pass", link=self, window=blank, width=100%]
 
@@ -165,7 +165,7 @@ With the completion of these sections we have created a compliance scan and succ
 [[cluster_rbac]]
 == Configuring Role-based Access Control for Cluster Roles
 
-One of the notable features that OpenShift is known for compared to vanilla Kubernetes is it's rich set of Role-Based Access Controls for separate user accounts and cluster roles that define what each user is able to do when logged into the cluster. In this section of the module we are going to create a read-only account for our auditor and explore the limitations by which they are bound.
+One of the notable features that OpenShift is known for compared to vanilla Kubernetes is its rich set of Role-Based Access Controls for separate user accounts and cluster roles that define what each user is able to do when logged into the cluster. In this section of the module we are going to create a read-only account for our auditor and explore the limitations by which they are bound.
 
 . Start by clicking on *User Management* and *Users* in the left side menu.
 . You will see the current *admin* user that you are logged in as listed, and you will see that the identity is provided by the htpasswd_provider:admin authenticator.
@@ -180,7 +180,7 @@ NOTE: If no other authenication source has been set up prior and you are logged 
 +
 image::module-02-sec-comp/25-create_group.png[title="Create Group", link=self, window=blank, width=100%]
 +
-. In the Create Group YAML dialog, set the name of the group to *auditor_readonly* and add the users *auditor1* and *auditor2*. Click the *Create* button.
+. In the Create Group YAML dialog, set the name of the group to `auditor_readonly` and add the users `auditor1` and `auditor2`. Click the *Create* button.
 +
 image::module-02-sec-comp/26-create_group_settings.png[title="Create Group Settings", link=self, window=blank, width=100%]
 +
@@ -194,7 +194,7 @@ image::module-02-sec-comp/28-create_binding.png[title="Create Binding", link=sel
 +
 . This will bring you to the *Create RoleBinding* page, on this page select the following to create a read-only role binding for the auditor, and click the *Create* button:
   * *Binding type:* Cluster-wide role binding
-  * *Name:* cluster_readonly
+  * *Name:* `cluster_readonly`
   * *Role name:* view
 +
 image::module-02-sec-comp/29-role_binding_details.png[title="RoleBinding Details", link=self, window=blank, width=100%]
@@ -216,7 +216,7 @@ image::module-02-sec-comp/32-add_htpass.png[title="Add Authentication", link=sel
 +
 NOTE: Notice that in addition to HTPasswd, there are many options that allow you to integrate external authorization and authentication solutions with Red Hat OpenShift, which is perfect for larger enterprises.
 +
-. You will be presented with a page that allows you to add in an HTPasswd file or supply usernames and hashed credentials for that purpose. Set the name of the identiry provider to *auditor_login* and paste the following syntax into the text box before clicking the *Add* button.
+. You will be presented with a page that allows you to add in an HTPasswd file or supply usernames and hashed credentials for that purpose. Set the name of the identiry provider to `auditor_login` and paste the following syntax into the text box before clicking the *Add* button.
 +
 [source,sh,role=execute]
 ----
@@ -248,8 +248,8 @@ image::module-02-sec-comp/37-logout_openshift.png[title="Log Out OpenShift", lin
 image::module-02-sec-comp/38-login_openshift.png[title="Log In OpenShift", link=self, window=blank, width=100%]
 +
 . Click on *auditor_login* and when presented use the following username and password combination:
-  * *Username:* auditor1
-  * *Password:* auditor1pass!
+  * *Username:* `auditor1`
+  * *Password:* `auditor1pass!`
 +
 image::module-02-sec-comp/39-auditor1_login.png[title="Auditor 1 Login", link=self, window=blank, width=100%]
 +
@@ -263,7 +263,7 @@ image::module-02-sec-comp/40-auditor1_admin_view.png[title="Auditor 1 Admin View
 +
 image::module-02-sec-comp/41-auditor1_vm_view.png[title="Auditor 1 VM View", link=self, window=blank, width=100%]
 +
-. Once they are on the VirtualMachine details page they can see the information about the virtual guest, including it's CPU and memory utilization, but they are prevented from launching the VNC console, or manipulating the machine state in any way as the buttons are greyed out.
+. Once they are on the VirtualMachine details page they can see the information about the virtual guest, including its CPU and memory utilization, but they are prevented from launching the VNC console, or manipulating the machine state in any way as the buttons are greyed out.
 +
 image::module-02-sec-comp/42-auditor1_database_readonly.png[title="Auditor 1 Database ReadOnly", link=self, window=blank, width=100%]
 +

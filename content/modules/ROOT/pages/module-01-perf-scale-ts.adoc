@@ -200,6 +200,12 @@ image::module-01-perf-scale-ts/32-update_specs.png[title="Update Specs", link=se
 +
 . Click back on the *Overview* tab. You will see that the CPU | Memory section in the details has been updated to the new value, and that the CPU utilization on the guest gradually drops quite quickly now that there are more available resources.
 +
+[NOTE]
+====
+The additional vCPUs you requested might not be available on the OpenShift node the VM is presently deployed on.
+You might see the VM automatically migrated to another node with adequate vCPU resources.
+====
++
 image::module-01-perf-scale-ts/33-vm_new_spec.png[title="New VM Spec", link=self, window=blank, width=100%]
 +
 . Repeat these steps for *winweb02*.

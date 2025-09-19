@@ -48,7 +48,7 @@ image::module-01-perf-scale-ts/03a-node_metrics.png[title="Node Metrics", link=s
 
 === Virtual Machine Graphs
 
-Outside of the physical cluster resources, it's also very important to be able to visualize what's going on with our applications and workloads like virtual machines. Lets examine the information we can find out about these.
+Outside of the physical cluster resources, it is also very important to be able to visualize what is going on with our applications and workloads like virtual machines. Lets examine the information we can find out about these.
 
 NOTE: For this part of the lab, we are going to use an application to generate additional load on some of our virtual machines so that we can see how graphs are generated.
 
@@ -160,7 +160,7 @@ image::module-01-perf-scale-ts/25-cpu_util_load.png[title="CPU Utilization and L
 +
 image::module-01-perf-scale-ts/26-power_on.png[title="Power On Winweb02", link=self, window=blank, width=100%]
 +
-. Return to the *Metrics* tab of the *winweb01* virtual machine, and click on it's *CPU* graph again. We should see the load begin to gradually come down.
+. Return to the *Metrics* tab of the *winweb01* virtual machine, and click on its *CPU* graph again. We should see the load begin to gradually come down.
 +
 image::module-01-perf-scale-ts/27-load_reducing.png[title="Load Reducing", link=self, window=blank, width=100%]
 +
@@ -180,7 +180,7 @@ We can see by examining the graphs that *winweb02* is introduced and takes on a 
 [[vert_scale_vm]]
 == Vertically Scaling VM Resources
 
-Even with the load evening out on the VMs over a 5 minute interval, we can still see that they are under fairly high load. Without the ability to scale further horizontally the only option that remains is to scale vertically by adding CPU and Memory resources to the VMs. Luckily as we explored in the previous module, this can be done by hot-plugging these resources, and not affect the workload as it's currently running.
+Even with the load evening out on the VMs over a 5 minute interval, we can still see that they are under fairly high load. Without the ability to scale further horizontally the only option that remains is to scale vertically by adding CPU and Memory resources to the VMs. Luckily as we explored in the previous module, this can be done by hot-plugging these resources, and not affect the workload as it is currently running.
 
 . Start by examining the graph on the metrics page from the previous section. You can set the refresh interval to the last 5 minutes with the dropdown in the upper left corner. Note that the load on the two virtual guests is holding steady near 1.0, which signifies that both guests are still pretty overwhelmed.
 +
@@ -270,7 +270,7 @@ image::module-01-perf-scale-ts/42-worker_node_3.png[title="Worker Node 3 Details
 +
 image::module-01-perf-scale-ts/43-vms_on_node_3.png[title="VMs On Worker Node 3", link=self, window=blank, width=100%]
 +
-. Now, click on *Nodes* in the left-side navigation menu, and then click on worker node 6 which will bring you to it's *Node details* page. Notice there are no CPU or Memory warnings currently on the node.
+. Now, click on *Nodes* in the left-side navigation menu, and then click on worker node 6 which will bring you to its *Node details* page. Notice there are no CPU or Memory warnings currently on the node.
 +
 image::module-01-perf-scale-ts/44-worker_node_6.png[title="Worker Node 6 Details", link=self, window=blank, width=100%]
 +
@@ -350,7 +350,7 @@ image::module-01-perf-scale-ts/54-node_7_taint.png[title="Node 7 Taint", link=se
 image::module-01-perf-scale-ts/55-node_7_taint_window.png[title="Remove Taint Window", link=self, window=blank, width=100%]
 +
 . Return to the virtual machine view by clicking on *Virtualization* and *VirtualMachines* in the left side menu, click on *All projects* and finally  click on the *Filter* drop down.
-. You can watch this view update in realtime, in a minute or two node 7 should appear and it's guest count should begin to rise as VMs are live migrated to the node to balance out the cluster
+. You can watch this view update in realtime, in a minute or two node 7 should appear and its guest count should begin to rise as VMs are live migrated to the node to balance out the cluster
 +
 image::module-01-perf-scale-ts/58-vms_on_nodes_7.png[title="VMs On Node 7", link=self, window=blank, width=100%]
 +

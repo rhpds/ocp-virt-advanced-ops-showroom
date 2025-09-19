@@ -215,6 +215,8 @@ image::module-01-perf-scale-ts/34-updated_usage.png[title="Updated Utilization",
 +
 . Click on *winweb01* and then click on the *Metrics* tab and the *CPU* graph to view how the utilization graph now looks. You can also re-add the query from *winweb02* and see that both graphs came down quite rapidly after the resources on each guest were increased, and the load on each VM is so much less than before.
 +
+NOTE: It might take some time for the actual values to be reflected in the graph.
++
 image::module-01-perf-scale-ts/35-updated_usage_verify.png[title="Verify Metrics", link=self, window=blank, width=100%]
 
 [[swap_mem]]

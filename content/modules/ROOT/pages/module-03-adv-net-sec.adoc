@@ -2,8 +2,7 @@
 
 == Introduction
 
-With the security audit underway, our VM-based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines (VMs) and containers increases complexity in ensuring efficient and secure operations. In this section we will introduce how to leverage the Network Observability operator to visualize our network traffic, how to shape and secure our network by implementing Network Policies, and how to automatically segregate our projects and their virtual workloads using UDN.
-
+With the security audit underway, our virtual machine (VM) based application architecture is becoming more distributed, spanning multiple namespaces, projects, and even different cloud environments. Our VMs and new containerized services need to communicate seamlessly, and we need clear visibility and precise control over network traffic, especially as managing both virtual machines and containers increases complexity in ensuring efficient and secure operations. In this section we will introduce how to leverage the Network Observability operator to visualize our network traffic, how to shape and secure our network by implementing Network Policies, and how to automatically segregate our projects and their virtual workloads using UDN.
 
 [[net_pol_egress]]
 == Configure Network Policies to Manage Cluster Egress
@@ -102,7 +101,7 @@ NOTE: For this section we are going to make use of UDN (User Defined Networks) a
 +
 image::module-03-adv-net-sec/12-create_namespace.png[title="Create Namespace", link=self, window=blank, width=100%]
 +
-. The *Create Namespace* prompt will open, and give you the option to enter a name, and add any custom labels to the namespace. Type in the name *dev* and add the following label: **k8s.ovn.org/primary-user-defined-network**, and click the *Create* button.
+. The *Create Namespace* prompt will open, and give you the option to enter a name, and add any custom labels to the namespace. Type in the name `dev` and add the following label: `k8s.ovn.org/primary-user-defined-network`, and click the *Create* button.
 +
 image::module-03-adv-net-sec/13-namespace_dialog.png[title="Create Namespace Dialog", link=self, window=blank, width=100%]
 +
@@ -110,7 +109,7 @@ image::module-03-adv-net-sec/13-namespace_dialog.png[title="Create Namespace Dia
 +
 image::module-03-adv-net-sec/14-namespace_details.png[title="Namespace Details", link=self, window=blank, width=100%]
 +
-. Repeat these steps to create namespaces for the *test* and *prod* namespaces as well.
+. Repeat these steps to create namespaces for the `test` and `prod` namespaces as well.
 
 === Create UDNs For Each Namespace
 
@@ -118,7 +117,7 @@ image::module-03-adv-net-sec/14-namespace_details.png[title="Namespace Details",
 +
 image::module-03-adv-net-sec/15-create_udn.png[title="Create UDN", link=self, window=blank, width=100%]
 +
-. In the dialog box that appears your project name will already be defined, you just need to enter the subnet you want to use. Type **192.168.253.0/24** into the box for the *dev* project, and click the *Create* button.
+. In the dialog box that appears your project name will already be defined, you just need to enter the subnet you want to use. Type `192.168.253.0/24` into the box for the *dev* project, and click the *Create* button.
 +
 image::module-03-adv-net-sec/16-create_udn_dialog.png[title="Create UDN Dialog", link=self, window=blank, width=100%]
 +
@@ -126,7 +125,7 @@ image::module-03-adv-net-sec/16-create_udn_dialog.png[title="Create UDN Dialog",
 +
 image::module-03-adv-net-sec/17-udn_details.png[title="UDN Details", link=self, window=blank, width=100%]
 +
-. Repeat these steps to create a UDN in the *test* namespace with subnet **192.168.254.0/24** and in the *prod* namespace with the subnet **192.168.255.0/24**
+. Repeat these steps to create a UDN in the *test* namespace with subnet `192.168.254.0/24` and in the *prod* namespace with the subnet `192.168.255.0/24`.
 . Once all three are created you should be able to click the *Project* dropdown at the top of the page and select *All Projects* to see them all listed.
 +
 image::module-03-adv-net-sec/18-udn_list.png[title="UDN List", link=self, window=blank, width=100%]
@@ -139,12 +138,12 @@ Now that we have defined our namespaces and created our UDNs, we need to put the
 +
 image::module-03-adv-net-sec/19-vm_catalog.png[title="VM Catalog", link=self, window=blank, width=100%]
 +
-. After clicking you will be presented with the *Fedora VM* dialog. Notice that the VM template shows that it is connected to the OpenShift pod network by default, however because of the label we placed on the namespace, it knows that it should default to using the UDN. Name your first VM *fedora-dev01*, and click on the *Quick create VirtualMachine* button.
+. After clicking you will be presented with the *Fedora VM* dialog. Notice that the VM template shows that it is connected to the OpenShift pod network by default, however because of the label we placed on the namespace, it knows that it should default to using the UDN. Name your first VM `fedora-dev01`, and click on the *Quick create VirtualMachine* button.
 +
 image::module-03-adv-net-sec/20-create_vm_dialog.png[title="Create VM Dialog", link=self, window=blank, width=100%]
 +
-. With this VM started, please repeat the steps to create an additional VM *fedora-dev02* in the *dev* namespace, followed by *fedora-test01* in the *test* namespace, and *fedora-prod01* in the *prod* namespace.
-. With the list of VM's created we can now test how traffic flows and doesn't flow between the VMs both within and between projects.
+. With this VM started, please repeat the steps to create an additional VM `fedora-dev02` in the *dev* namespace, followed by `fedora-test01` in the *test* namespace, and `fedora-prod01` in the *prod* namespace.
+. With the list of VMs created we can now test how traffic flows and doesn't flow between the VMs both within and between projects.
 
 === Testing VM Connectivity
 
@@ -153,7 +152,7 @@ image::module-03-adv-net-sec/20-create_vm_dialog.png[title="Create VM Dialog", l
 +
 image::module-03-adv-net-sec/21-dev-vms.png[title="Dev VMs", link=self, window=blank, width=100%]
 +
-. Click on fedora-dev01, and click the button to launch its web console.
+. Click on *fedora-dev01*, and click the button to launch its *web console*.
 +
 image::module-03-adv-net-sec/22-fedora-dev01.png[title="Fedora-Dev01 Details", link=self, window=blank, width=100%]
 +
@@ -190,7 +189,7 @@ This is a look at how it the operator is configured, and how it collects the dat
 
 image::module-03-adv-net-sec/27-net_obsv_arch.png[title="Network Observability Operator Architecture", link=self, window=blank, width=100%]
 
-. To get started with the Network Observability operator, we want to click on *Observe* on the left side menu, and then on *Network Traffic*. The initial view is called the Overview and shows us *node* view by default, whereour top 5 average byte rates produced by current workloads, and shows a graph of our workflows. These views can be adjusted over time range of collected data, and be set up to refresh automatically if desired.
+. To get started with the Network Observability operator, we want to click on *Observe* on the left side menu, and then on *Network Traffic*. The initial view is called the Overview and shows us *node* view by default, whereour top five average byte rates produced by current workloads, and shows a graph of our workflows. These views can be adjusted over time range of collected data, and be set up to refresh automatically if desired.
 +
 image::module-03-adv-net-sec/28-network_traffic_node.png[title="Network Traffic Node", link=self, window=blank, width=100%]
 +
@@ -226,7 +225,6 @@ image::module-03-adv-net-sec/35-netobserv_dashboard.png[title="NetObserv Dashboa
 . The dashboard provides a number of default graphs that would be useful to network administrators when trying to visualize the network traffic in their cluster.
 
 The Network Observability operator is a very powerful tool for OpenShift that equips both network and virtual machine administrators to ensure the security of their environment, and confirm that no unexpected traffic is entering or leaving their cluster.
-
 
 == Summary
 In this section we learned how to create and apply a simple network policy to block egress traffic from a virtual machine to a public website, and as an advanced example we learned to isolate traffic between virtual guests and projects on the same cluster by leveraging UDN's native network segregation. We also took a brief look at the benefits provided by the Network Observability operator, and how it can make visualizing the network traffic flow in your cluster much easier.

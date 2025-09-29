@@ -23,7 +23,7 @@ image::module-05-virt-acm/01a-import_cluster_alt.png[title="Import Cluster Alt",
 +
 . The next screen you will be presented with is the *Details* page for the *Import an existing cluster* wizard. Fill in the fields on the page with the following values:
 +
-* *Name:* userX-virt-cluster
+* *Name:* `userX-virt-cluster`
 * *Cluster set:* legacy-systems-inc
 * *Import mode:* Enter your server URL and API token for the existing cluster
 +
@@ -36,8 +36,8 @@ image::module-05-virt-acm/03-copy_login_command.png[title="Copy Login Command", 
 +
 . A new tab will open and you will be prompted to login to your cluster through the htpass_provider authorization agent again. As a reminder, your cluster admin credentials are:
 +
-* *User:* {openshift_cluster_admin_username}
-* *Password:* {openshift_cluster_admin_password}
+* *User:* `{openshift_cluster_admin_username}`
+* *Password:* `{openshift_cluster_admin_password}`
 +
 . When you login you will see a large white screen with a link named *Display Token*. Click it.
 +

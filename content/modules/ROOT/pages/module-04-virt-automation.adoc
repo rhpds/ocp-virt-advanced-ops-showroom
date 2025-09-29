@@ -54,7 +54,7 @@ image::module-04-virt-automation/04-create_inventory.png[title="Create Inventory
 image::module-04-virt-automation/05-sources_tab.png[title="Sources Tab", link=self, window=blank, width=100%]
 +
 . Fill out or select the appropriate value from the drop down menus available for the following fields in the *Create Source* form:
-   * *Name:* OpenShift Virtual Machines Source
+   * *Name:* `OpenShift Virtual Machines Source`
    * *Execution environment:* Day 2 EE
    * *Source:* OpenShift Virtualization
    * *Credential:* OpenShift Credential
@@ -653,7 +653,7 @@ Although you don't need to create or modify these files, it's important to under
 
 === Understanding the Provided Snapshot Task Files
 
-The snapshot automation uses a two tiered approach where one task file handles multiple snapshots using loops, and an include task file takes the individual VM snapshots. 
+The snapshot automation uses a two tiered approach where one task file handles multiple snapshots using loops, and an include task file takes the individual VM snapshots.
 
 === snapshot_vms.yml
 
@@ -752,7 +752,7 @@ Now let's connect all the pieces through the AAP web interface and run the snaps
 [cols="2,3",options="header"]
 |===
 | Parameter | Value
-| *Name* | Snapshot VMs
+| *Name* | `Snapshot VMs`
 | *Job Type* | Run
 | *Inventory* | OpenShift Virtual Machines
 | *Project* | Workshop Project
@@ -774,13 +774,15 @@ image::module-04-virt-automation/31-create-snapshot.png[title="Create Snapshot T
 
 Once the Job completes successfully, confirm the new Snapshot has been created.
 
-. Navigate to the OpenShift console and go to *Virtualization → VirtualMachines* within the `vms-aap-day2` project.
+. Navigate to the OpenShift console and go to *Virtualization → VirtualMachines* within the *vms-aap-day2* project.
 
-. Select the `rhel9-vm1` instance and click the *Snapshots* tab.
+. Select the *rhel9-vm1* instance and click the *Snapshots* tab.
 
 . Verify that the snapshot appears in the list.
 +
 image::module-04-virt-automation/32-ocp-snapshot-details.png[title="Snapshot Details", link=self, window=blank, width=100%]
+
+NOTE: Make a note of this snapshot name, as it will be used in the next section to restore the snapshot.
 
 === Understanding the Provided Restoration Task Files
 
@@ -894,7 +896,7 @@ This included task file manages the complete restoration workflow following thes
 [cols="2,3",options="header"]
 |===
 | Parameter | Value
-| *Name* | Restore VM Snapshots
+| *Name* | `Restore VM Snapshots`
 | *Job Type* | Run
 | *Inventory* | OpenShift Virtual Machines
 | *Project* | Workshop Project
@@ -918,9 +920,9 @@ image::module-04-virt-automation/33-restore-snapshot.png[title="Restore Snapshot
 
 Once the Job completes successfully, confirm the restoration was applied.
 
-. Navigate to the OpenShift console and go to *Virtualization → VirtualMachines* within the `vms-aap-day2` project.
+. Navigate to the OpenShift console and go to *Virtualization → VirtualMachines* within the *vms-aap-day2* project.
 
-. Select the `rhel9-vm1` instance and click the *Snapshots* tab.
+* Select the *rhel9-vm1* instance and click the *Snapshots* tab.
 
 . Locate the snapshot you restored and verify the *Last restored* column shows the recent restoration timestamp.
 +
@@ -929,4 +931,3 @@ image::module-04-virt-automation/34-ocp-restore-snapshot-details.png[title="Rest
 == Summary
 
 In this module you have spent a day in the life of an OpenShift Virtualization administrator making use of Ansible Automation Platform to automate a number of administrative tasks that staff experience often on a day-to-day basis from discovering a dynamic inventory of the virtual machines available to manage, to ensuring they are safely backed up and restored in a disaster recovery scenario.
-

@@ -27,7 +27,7 @@ image::module-05-virt-acm/01a-import_cluster_alt.png[title="Import Cluster Alt",
 * *Cluster set:* legacy-systems-inc
 * *Import mode:* Enter your server URL and API token for the existing cluster
 +
-image::module-05-virt-acm/02-import_cluster_details.png[title="Import Cluster Details", link=self, window=blank, width=100%] 
+image::module-05-virt-acm/02-import_cluster_details.png[title="Import Cluster Details", link=self, window=blank, width=100%]
 +
 . Once you have selected the *Import mode* you will be prompted to provide the *Server URL* and *API Token* to discover your cluster. You will need to get these values from your original cluster in order to discover it.
 . Return to the tab with your original lab cluster open, and click on the *admin* user at the top and select the option to *Copy login command* from the dropdown menu.
@@ -63,7 +63,7 @@ image::module-05-virt-acm/08-import_cluster_review.png[title="Import Cluster Rev
 +
 image::module-05-virt-acm/09-import_in_progress.png[title="Import In Progress", link=self, window=blank, width=100%]
 +
-. When the cluster import process completes you will see the cluster status listed as *Ready* and see a large amount of information about the cluster, including it's *Infrastructure* type, the current subscribed software *Channel*, it's *Cluster set*, links to open it's console directly, and a list of *Labels* used to describe the cluster.
+. When the cluster import process completes you will see the cluster status listed as *Ready* and see a large amount of information about the cluster, including its *Infrastructure* type, the current subscribed software *Channel*, its *Cluster set*, links to open its console directly, and a list of *Labels* used to describe the cluster.
 +
 image::module-05-virt-acm/10-import_complete.png[title="Import Complete", link=self, window=blank, width=100%]
 
@@ -78,7 +78,7 @@ image::module-05-virt-acm/11-node_list.png[title="Node List", link=self, window=
 +
 . A new tab will launch and display the node page from your mananged cluster, just as we reviewed in module 1.
 +
-image::module-05-virt-acm/12-node_3_details.png[title="Node 3 Details", link=self, window=blank, width=100%] 
+image::module-05-virt-acm/12-node_3_details.png[title="Node 3 Details", link=self, window=blank, width=100%]
 +
 . We can close this window and we can also see collected graphs on the managed cluster by click on the *Grafana* link at the top of the page. Click the link now.
 +
@@ -88,7 +88,7 @@ image::module-05-virt-acm/13-grafana_link.png[title="Grafana Link", link=self, w
 +
 image::module-05-virt-acm/14-log_in_grafana.png[title="Grafana Login", link=self, window=blank, width=100%]
 +
-. The OpenShift login will appear and you will need to login with your associated *UserX* account and it's password.
+. The OpenShift login will appear and you will need to login with your associated *UserX* account and its password.
 +
 image::module-05-virt-acm/00-openshift_login.png[title="OpenShift Login", link=self, window=blank, width=100%]
 +
@@ -119,7 +119,7 @@ image::module-05-virt-acm/19-multi_cluster_view.png[title="Multi Cluster View", 
 +
 image::module-05-virt-acm/20-multi_cluster_dashboard.png[title="Multi Cluster Dashboard", link=self, window=blank, width=100%]
 
-Now that we know how to observe the status of our virtual estate across a multicluster environment, lets see how we can manage it. 
+Now that we know how to observe the status of our virtual estate across a multicluster environment, lets see how we can manage it.
 
 NOTE: You may now close the tab where Grafana launched and return to the RHACM console
 
@@ -130,8 +130,8 @@ NOTE: You may now close the tab where Grafana launched and return to the RHACM c
 +
 image::module-05-virt-acm/21-infrastructure_vms.png[title="Left Side Menu", link=self, window=blank, width=100%]
 +
-. You will be brought to a page that lists all of the virtual machines that RHACM can currently see. 
-. The columns present help you sort and identify specific virtual machines by their *Name*, *Cluster*, *Namespace*, or *Node*. 
+. You will be brought to a page that lists all of the virtual machines that RHACM can currently see.
+. The columns present help you sort and identify specific virtual machines by their *Name*, *Cluster*, *Namespace*, or *Node*.
 . The list of columns is fully customizable, and so are the number of machines displayed on the page.
 +
 image::module-05-virt-acm/22-virtual_machine_list.png[title="Virtual Machine List", link=self, window=blank, width=100%]
@@ -143,11 +143,9 @@ image::module-05-virt-acm/23-launch_links.png[title="Launch Links", link=self, w
 . While clicking the *Virtual machine details* link from *Launch links* opens the VM management in a new tab, if you had to manipulate a number of VMs quickly it would be much nicer to do it directly from RHACM.
 . You can do exactly that by clicking on the 3-dot menu on the right side of each VM, and you will see the list that appears is almost exactly the same as the actions list you see on the *Virtual machine details* page.
 . You can use this menu to stop/start/restart a VM, take a snapshot, or edit the machine's definition via YAML.
-+ 
++
 image::module-05-virt-acm/24-vm_management.png[title="Virtual Machine Management", link=self, window=blank, width=100%]
 
 == Summary
 
 In this module we learned how to discover, observe and manage our virtualized workloads using Red Hat Advanced Cluster Managment for Kubernetes (RHACM). The content in this module is just the tip of the iceberg when it comes to what RHACM can do in a multicluster OpenShift Virtualization environment. As mentioned before Ansible automation can be leveraged to perform automated actions across multiple clusters, and powerful tools like GitOps can be leveraged to deploy sets of VMs and ensure that cluster configurations are kept in sync across the entire virtual estate.
-
-

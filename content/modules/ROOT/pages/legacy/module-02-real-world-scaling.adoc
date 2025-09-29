@@ -51,7 +51,7 @@ image::module-02-real-world-scaling/07-cpu_util_load.png[title="CPU Utilization 
 +
 image::module-02-real-world-scaling/08-power_on.png[title="Power On Winweb02", link=self, window=blank, width=100%]
 +
-. Return to the *Metrics* tab of the *winweb01* virtual machine, and click on it's *CPU* graph again. We should see the load begin to gradually come down.
+. Return to the *Metrics* tab of the *winweb01* virtual machine, and click on its *CPU* graph again. We should see the load begin to gradually come down.
 +
 image::module-02-real-world-scaling/09-load_reducing.png[title="Load Reducing", link=self, window=blank, width=100%]
 +
@@ -162,7 +162,7 @@ image::module-02-real-world-scaling/24-worker_node_2.png[title="Worker Node 2 De
 +
 image::module-02-real-world-scaling/25-vms_on_node_2.png[title="VMs On Worker Node 2", link=self, window=blank, width=100%]
 +
-. Now, click on *Nodes* in the left-side navigation menu, and then click on worker node 1 which will bring you to it's *Node details* page. Notice there are no CPU or Memory warnings currently on the node. 
+. Now, click on *Nodes* in the left-side navigation menu, and then click on worker node 1 which will bring you to its *Node details* page. Notice there are no CPU or Memory warnings currently on the node. 
 +
 image::module-02-real-world-scaling/26-worker_node_1.png[title="Worker Node 1 Details", link=self, window=blank, width=100%]
 +

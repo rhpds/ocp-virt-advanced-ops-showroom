@@ -122,7 +122,7 @@ image::module-03-adv-net-sec/15-create_udn.png[title="Create UDN", link=self, wi
 +
 image::module-03-adv-net-sec/16-create_udn_dialog.png[title="Create UDN Dialog", link=self, window=blank, width=100%]
 +
-. You will be taken to the *UserDefinedNetwork details* page which shows information about the UDN you just created including details such as it's namespace, topology, subnet, and shows you that it has automatically created a Network Attachment Definition for you to connect your virtual machines.
+. You will be taken to the *UserDefinedNetwork details* page which shows information about the UDN you just created including details such as its namespace, topology, subnet, and shows you that it has automatically created a Network Attachment Definition for you to connect your virtual machines.
 +
 image::module-03-adv-net-sec/17-udn_details.png[title="UDN Details", link=self, window=blank, width=100%]
 +
@@ -153,7 +153,7 @@ image::module-03-adv-net-sec/20-create_vm_dialog.png[title="Create VM Dialog", l
 +
 image::module-03-adv-net-sec/21-dev-vms.png[title="Dev VMs", link=self, window=blank, width=100%]
 +
-. Click on fedora-dev01, and click the button to launch it's web console.
+. Click on fedora-dev01, and click the button to launch its web console.
 +
 image::module-03-adv-net-sec/22-fedora-dev01.png[title="Fedora-Dev01 Details", link=self, window=blank, width=100%]
 +
@@ -169,7 +169,7 @@ image::module-03-adv-net-sec/24-ping_success.png[title="Fedora-Dev02 Ping Succes
 +
 . Now that we have tested the ping within our namespace, lets try between namespaces and networks to see what happens.
 . Return to the tab where you have the *fedora-dev01* details pulled up and click on the *test* project in the center column.
-+ 
++
 image::module-03-adv-net-sec/25-fedora_test_01.png[title="Fedora-Test01", link=self, window=blank, width=100%]
 +
 . Make note of the IP address that the *fedora-test01* VM has.

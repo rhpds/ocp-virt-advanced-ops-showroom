@@ -189,7 +189,7 @@ This is a look at how it the operator is configured, and how it collects the dat
 
 image::module-03-adv-net-sec/27-net_obsv_arch.png[title="Network Observability Operator Architecture", link=self, window=blank, width=100%]
 
-. To get started with the Network Observability operator, we want to click on *Observe* on the left side menu, and then on *Network Traffic*. The initial view is called the Overview and shows us *node* view by default, whereour top five average byte rates produced by current workloads, and shows a graph of our workflows. These views can be adjusted over time range of collected data, and be set up to refresh automatically if desired.
+. To get started with the Network Observability operator, we want to click on *Observe* on the left side menu, and then on *Network Traffic*. The initial view is called the Overview and shows us *node* view by default, where our top five average byte rates produced by current workloads, and shows a graph of our workflows. These views can be adjusted over time range of collected data, and be set up to refresh automatically if desired.
 +
 image::module-03-adv-net-sec/28-network_traffic_node.png[title="Network Traffic Node", link=self, window=blank, width=100%]
 +

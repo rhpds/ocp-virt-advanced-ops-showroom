@@ -117,7 +117,7 @@ image::module-03-adv-net-sec/14-namespace_details.png[title="Namespace Details",
 +
 image::module-03-adv-net-sec/15-create_udn.png[title="Create UDN", link=self, window=blank, width=100%]
 +
-. In the dialog box that appears your project name will already be defined, you just need to enter the subnet you want to use. Type `192.168.253.0/24` into the box for the *dev* project, and click the *Create* button.
+. In the dialog box that appears your project name will already be defined, you just need to enter the subnet you want to use. Type `192.168.*253*.0/24` into the box for the *dev* project, and click the *Create* button.
 +
 image::module-03-adv-net-sec/16-create_udn_dialog.png[title="Create UDN Dialog", link=self, window=blank, width=100%]
 +
@@ -125,7 +125,7 @@ image::module-03-adv-net-sec/16-create_udn_dialog.png[title="Create UDN Dialog",
 +
 image::module-03-adv-net-sec/17-udn_details.png[title="UDN Details", link=self, window=blank, width=100%]
 +
-. Repeat these steps to create a UDN in the *test* namespace with subnet `192.168.254.0/24` and in the *prod* namespace with the subnet `192.168.255.0/24`.
+. Repeat these steps to create a UDN in the *test* namespace with subnet `192.168.*254*.0/24` and in the *prod* namespace with the subnet `192.168.*255*.0/24`.
 . Once all three are created you should be able to click the *Project* dropdown at the top of the page and select *All Projects* to see them all listed.
 +
 image::module-03-adv-net-sec/18-udn_list.png[title="UDN List", link=self, window=blank, width=100%]
